@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* navBar  */
+#navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navBarButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+#register {
+  height: 32px;
+  width: 64px;
+}
+
+#signIn {
+  height: 32px;
+  width: 64px;
+}
+
+/* registeredVenuesList */
+
+#registeredVenues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.venue {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.venue img {
+  border-radius: 5px;
+
+}
