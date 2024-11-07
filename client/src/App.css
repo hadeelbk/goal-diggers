@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.homePage {
+  background-color: rgb(39, 52, 105);
 }
 
 /* navBar  */
@@ -10,6 +18,28 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  background-color: rgb(30, 39, 73);
+  height: 80px;
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2);
+}
+
+#navBar #logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+#navBar img {
+  height: 60px;
+}
+
+#navBar p {
+  font-family: Papyrus;
+  font-size: 40px;;
+  font-style: italic;
+  font-weight: bold;
+  color: rgb(228, 217, 255);
 }
 
 .navBarButtons {
@@ -19,16 +49,74 @@
 }
 
 #register {
-  height: 32px;
-  width: 64px;
+  height: 48px;
+  width: 96px;
+  border-radius: 5px;
+  border: 0cap;
+  background-color: rgb(250, 250, 255);
+  color: rgb(48, 52, 63);
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #signIn {
-  height: 32px;
-  width: 64px;
+  height: 48px;
+  width: 96px;
+  border-radius: 5px;
+  border: 0cap;
+  background-color: rgb(6, 214, 160);
+  color: white;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
 }
 
+/* actionContainer */
+#actionContainer {
+  background-color: rgb(39, 52, 105);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 360px;
+  height: 720px;
+}
+
+#actionContainer img {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: thick;
+  border-color: rgb(228, 217, 255); /* check this instead 6, 214, 160*/
+  transition: all 0.3s ease;
+}
+
+#actionContainer a {
+  text-decoration: none;
+}
+
+#actionContainer p {
+  color: rgb(250, 250, 255);
+  text-align: center;
+  margin-top: 24px;
+  font-family: Roboto;
+  font-size: 30px;
+  transition: all 0.3s ease;
+}
+
+#actionContainer a:hover img {
+  border-color: rgb(6, 214, 160); 
+  transform: scale(1.10); 
+}
+
+#actionContainer a:hover p {
+  color: rgb(6, 214, 160); 
+}
+
+
 /* registeredVenuesList */
+#venueList {
+  background-color: rgb(39, 52, 105);
+  margin-top: 60px;
+}
 
 #registeredVenues {
   display: flex;
@@ -44,5 +132,16 @@
 
 .venue img {
   border-radius: 5px;
+}
 
+
+/* host game form */ 
+
+.hostGameForm {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: flex-end;
+  align-items: center;
 }
