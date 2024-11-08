@@ -7,14 +7,14 @@ function RegisteredVenueList () {
   const venues = useContext(VenuesContext)
   return (
     <div id='venueList'>
-      <h1>Where the action takes place</h1>
-      <h3>Our registered venues</h3>
+      <p id='venueTitle'>Where the action takes place</p>
+      <p id='venueSubTitle'>Our registered venues</p>
       <div id='registeredVenues'>
         {venues.map((venue,index) => (
         <div className='venue' key={venue._id}>
           <img src={venue.image} height='250'/>
-          <p>{venue.name}</p>
-          <p>{venue.address}</p>
+          <p id='venueName'>{venue.name}</p>
+          <p id='venueAddress'>{venue.address}</p>
         </div>
     ))
     }
