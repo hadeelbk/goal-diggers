@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import HostGameForm from './components/HostGameForm';
 import AvailableGames from './components/AvailableGames';
+import GameDetails from './components/gameDetails';
 
 
 export const VenuesContext = React.createContext()
@@ -60,6 +61,7 @@ function App() {
             <Route path='/' element={<Home/>} />
             <Route path='host-game' element={<HostGameForm/>} />
             <Route path='available-games' element={<AvailableGames/>} />
+            <Route path='game-details' element={<GameDetails/>} />
           </Routes>
         </GamesContext.Provider>
       </VenuesContext.Provider>

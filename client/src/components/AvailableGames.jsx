@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { GamesContext,VenuesContext } from "../App";
 import { format, differenceInCalendarDays } from 'date-fns';
 import NavBar from "./NavBar";
+import { NavLink } from "react-router-dom";
+import HostGameForm from "./HostGameForm";
 
 function AvailableGames () {
 
@@ -73,11 +75,12 @@ function AvailableGames () {
   return (
     <div className='availableGamesPage'>
       <NavBar/>
-      <div className='filters'>
-        <form>
+      <div className='filterContainer'>
+        <form className='filters'> 
 
           <div className='filterVenue'>
             <label htmlFor='venue'>VENUE</label>
+            <br/>
             <select name='venue' id='filterVenue' value={venueFilter} onChange={handleVenueFilterChange}>
               <option value=''>Select a venue</option>
               {venues.map(venue => (
@@ -87,7 +90,8 @@ function AvailableGames () {
           </div>
 
           <div className='filterGameType'>
-            <label htmlFor='gameType'>GAME TYPE</label>
+            <label htmlFor='gameType'>GAME TYPE</label> 
+            <br/>
             <select name='gameType' id='filterGameType' value={gameTypeFilter} onChange={handleGameTypeFilterChange}>
               <option value="">Select a game type</option>
               <option value='5-a-side'>5-a-side</option>
@@ -102,6 +106,7 @@ function AvailableGames () {
 
           <div className='filterDate'>
             <label htmlFor='date'>DATE & TIME</label>
+            <br/>
             <input type='datetime-local' name='date' id='filterDate' value={dateFilter} onChange={handleDateFilterChange}/>
           </div>
 
@@ -111,6 +116,7 @@ function AvailableGames () {
 
         {filteredGames.length>0 && filteredGames.map(game => (
           <div className='availableGame' key={game._id}>
+            <NavLink to='/game-details'>
             <div className='gameDate'>
               <p>{gameDateDisplay(game.date)}</p>
             </div>
@@ -124,29 +130,42 @@ function AvailableGames () {
                 <p>{gameTimeDisplay(game.date)}</p>
               </div>
               <div className='venueIcon'>
-                <img src="https://cdn-icons-png.flaticon.com/128/17355/17355932.png" alt="Kick-off icon" className="icon" />
+                <img src="https://cdn-icons-png.flaticon.com/128/17355/17355932.png" alt="Venue icon" className="icon" />
               </div>
               <div className='gameVenue'>
                 <p>{game.venue.name}</p>
               </div>
-              <div className='gameType'>
-                <p>{game.game_type}</p>
+              <div className='addressIcon'>
+                <img src="https://cdn-icons-png.flaticon.com/128/17296/17296756.png" alt="Address icon" className="icon" />
+              </div>
+              <div className='venueAddress'>
+                <p>{game.venue.address}</p>
+              </div>
+              <div className='priceIcon'>
+                <img src="https://cdn-icons-png.flaticon.com/128/13252/13252513.png" alt="Price icon" className="icon" />
+              </div>
+              <div className='gamePrice'>
+                <p>{game.price_per_head}€</p>
+              </div>
+              <div className='playerIcon'>
+                <img src="https://cdn-icons-png.flaticon.com/128/14735/14735123.png" alt="Player icon" className="icon" />
               </div>
               <div className='extraDetails'>
-                <div className='gamePrice'>
-                  <p>£{game.price_per_head}</p>
+                <div className='gameType'>
+                  <p>{game.game_type}</p>
                 </div>
                 <div className='registeredPlayers'>
                   <p>7/18</p> {/*needs to be altered once you add the players array*/}
                 </div>
               </div>
             </div>
+            </NavLink>
           </div>
         ))}
-
         {venueFilter === '' || (Array.isArray(filteredGames) && filteredGames.length === 0) &&
-          <div className='notAvailableGames'>
-          <h1>No available games with the current selection</h1>
+        <div className='notAvailableGames'>
+          <p>Don’t see any games? Take the lead and host one of your own!</p>
+          <HostGameForm gameVenue={venueFilter} gameType={gameTypeFilter} gameDate={dateFilter} />
         </div>
         }
     </div>

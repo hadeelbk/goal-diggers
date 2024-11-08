@@ -1,4 +1,3 @@
-import React from "react";
 import NavBar from './NavBar';
 import RegisteredVenueList from './registeredVenueList';
 import ActionContainer from './ActionContainer';

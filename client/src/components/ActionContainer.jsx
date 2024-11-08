@@ -1,6 +1,3 @@
-import React from "react";
-import { GiSoccerKick } from "react-icons/gi";
-import { GiSoccerField } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 
 function ActionContainer () {

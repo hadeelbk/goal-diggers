@@ -187,20 +187,56 @@
 
 /* AvailableGames List */ 
 
+.filterContainer {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left:400px;
+  margin-right:400px;
+  margin-top: 24px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.filters label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgb(228, 217, 255);
+}
+
+.filters select {
+  font-family: 'Montserrat', sans-serif;
+  color:rgb(48, 52, 63);
+  font-weight: bold;
+ }
 .availableGamesPage {
   background-color: rgb(39, 52, 105);
 }
+
+
 
 .availableGamesContainer {
   margin-top: 80px;
   margin-left: 250px;
   margin-right: 250px;
+  text-decoration: none;
+}
+
+.availableGamesContainer a {
+  text-decoration: none;
 }
 
 .availableGame {
   display: flex;
   flex-direction: column;
   margin-top: 32px;
+  transition: all 0.3s ease;
 }
 
 .gameDate {
@@ -215,6 +251,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
   gap: 32px;
   background-color: rgb(228, 217, 255);
   border-radius: 5px;
@@ -234,8 +271,29 @@
 .venueIcon img {
   height: 80px;
 }
+
+.addressIcon img {
+  height: 80px;
+}
+
+.priceIcon img {
+  height: 60px;
+}
+
+.playerIcon img {
+  height: 80px;
+}
 .extraDetails {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 18px;
+}
+
+.availableGame a:hover .gameDetails {
+  border-color: rgb(6, 214, 160); 
+}
+
+.availableGame a:hover .gameDate {
+  color: rgb(6, 214, 160); 
 }

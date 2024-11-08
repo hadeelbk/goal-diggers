@@ -1,5 +1,3 @@
-import React from "react";
-import { GiSoccerBall } from "react-icons/gi";
 
 function NavBar () {
   return (

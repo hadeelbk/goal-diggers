@@ -1,4 +1,3 @@
-import React from "react";
 import { useContext } from "react";
 import {VenuesContext} from '../App'
 
@@ -10,7 +9,7 @@ function RegisteredVenueList () {
       <p id='venueTitle'>Where the action takes place</p>
       <p id='venueSubTitle'>Our registered venues</p>
       <div id='registeredVenues'>
-        {venues.map((venue,index) => (
+        {venues.map((venue) => (
         <div className='venue' key={venue._id}>
           <img src={venue.image} height='250'/>
           <p id='venueName'>{venue.name}</p>
