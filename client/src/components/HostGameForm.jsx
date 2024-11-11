@@ -13,6 +13,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
     date: gameDate || '',
     players: '',
     game_type: gameType || '',
+    duration: '',
     price_per_head:'',
     contact_details:''
   });
@@ -29,7 +30,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
   const handleSubmit = async (event) => {
     event.preventDefault()
     const newGame = {...game}
-    console.log(newGame)
+   
     try {
       const response = await fetch(basedUrl+'games', {
         method: 'POST',
@@ -41,13 +42,14 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
 
       if (response.ok) {
         const createdGame = await response.json();
-        setGames([...games, createdGame])
+        setGames([...games, createdGame]);
         setGame({
           venue: '',
           date: '',
           players: '',
           game_type: '',
-          price_per_head:'',
+          duration: '',
+          price_per_head: '',
           contact_details:''
       })
       }
@@ -55,7 +57,6 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
     } catch (error) {
       console.log(error)
     }
-
   }
 
 
@@ -78,7 +79,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
           <div className='formElement'>
             <label htmlFor="date">DATE:</label>
             <br/>
-            <input type='datetime-local' name='date' id='date' value={game.date} onChange={handleChange}/>
+            <input type='datetime-local' name='date' id='date' value={game.date} onChange={handleChange} min={new Date().toISOString().slice(0, 16)}/>
           </div>
   
           <div className='formElement'>
@@ -101,11 +102,17 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
               <option value='11-a-side'>11-a-side</option>
             </select>
           </div>
+
+          <div className='formElement'>
+            <label htmlFor="duration">DURATION (h):</label>
+            <br/>
+            <input type='number' name='duration' id='duration' min='0' max='2' placeholder="0" step='0.5' value={game.duration} onChange={handleChange}/>
+          </div>
   
           <div className='formElement'>
-            <label htmlFor="price_per_head">PRICE per PLAYER</label>
+            <label htmlFor="price_per_head">PRICE per PLAYER (€):</label>
             <br/>
-            <input type='number' name='price_per_head' id='price' value={game.price_per_head} onChange={handleChange}/>
+            <input type='number' name='price_per_head' id='price' min='0' placeholder="0" step='0.5' value={game.price_per_head} onChange={handleChange}/>
           </div>
   
           <div className='formElement'>

@@ -219,8 +219,6 @@
   background-color: rgb(39, 52, 105);
 }
 
-
-
 .availableGamesContainer {
   margin-top: 80px;
   margin-left: 250px;
@@ -297,3 +295,73 @@
 .availableGame a:hover .gameDate {
   color: rgb(6, 214, 160); 
 }
+
+
+/* Game Details */ 
+.gameDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  /* font-weight: bold; */
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(228, 217, 255);
+  font-size: 48px;
+}
+
+.gameTitle {
+  background-color: rgb(30, 39, 73);
+  height: 80px;
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2);
+  align-content: center;
+  padding-left: 40px;
+}
+.gameInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.gameInfoContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+  min-height: 400px;
+}
+
+.gameInfoTitle {
+  background-color: rgb(123, 44, 191);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 48px;
+  padding-left: 8px;
+}
+.gameInfoElement {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 100%;
+  gap: 32px;
+  background-color: rgb(228, 217, 255) ;
+}
+
+.gameInfoElement p {
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(30, 39, 73)
+}
+
+.gameInfoElement img {
+  height: 80px;
+}
+
+
+.gameInfoElements {
+  display: flex;
+  flex-direction: column;
+}
+

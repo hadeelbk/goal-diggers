@@ -7,16 +7,21 @@ import Home from './components/Home';
 import HostGameForm from './components/HostGameForm';
 import AvailableGames from './components/AvailableGames';
 import GameDetails from './components/gameDetails';
-
+import RegisterForm from './components/RegisterForm';
+import LoginPage from './components/LoginPage';
+import UserPage from './components/UserPage';
 
 export const VenuesContext = React.createContext()
 export const GamesContext = React.createContext()
+export const UsersContext = React.createContext()
   
 function App() {
   const [venues, setVenues] = useState([]);
   const [games, setGames] = useState([])
+  const [users, setUsers] = useState([])
   const [venueError, setVenueError] = useState(null);
   const [gameError, setGameError] = useState(null);
+  const [userError, setUserError] = useState(null)
   const [sorted, setSorted] = useState([]);
 
   const basedUrl = 'http://localhost:3000/'
@@ -32,7 +37,7 @@ function App() {
         console.log(venueError)
       }
     })();
-  },[])
+  },[games])
 
   useEffect(() => {
     (async function fetchData () {
@@ -48,6 +53,20 @@ function App() {
   },[])
 
   useEffect(() => {
+    (async function fetchData () {
+      try {
+        const response = await fetch(basedUrl+'users')
+        const data = await response.json()
+        setUsers(data)
+      } catch (error) {
+        setUserError(error.message)
+        console.log(userError)
+      }
+    })();
+  },[])
+
+  
+  useEffect(() => {
     const sortedGames = games.filter( game => new Date(game.date) > new Date())
     .sort((a,b) => new Date(a.date) - new Date(b.date));
     setSorted(sortedGames)
@@ -57,12 +76,17 @@ function App() {
     <div className='app'>
       <VenuesContext.Provider value={venues}>
         <GamesContext.Provider value={{games, sorted, setGames}}>
-          <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='host-game' element={<HostGameForm/>} />
-            <Route path='available-games' element={<AvailableGames/>} />
-            <Route path='game-details' element={<GameDetails/>} />
-          </Routes>
+          <UsersContext.Provider value={{users, setUsers}}>
+            <Routes>
+              <Route path='/' element={<Home/>} />
+              <Route path='users/register'element={<RegisterForm/>} />
+              <Route path='users/login' element={<LoginPage/>} />
+              <Route path='users/:userId' element={<UserPage/>} />
+              <Route path='host-game' element={<HostGameForm/>} />
+              <Route path='available-games' element={<AvailableGames/>} />
+              <Route path='game-details/:gameId' element={<GameDetails/>} />
+            </Routes>
+          </UsersContext.Provider>
         </GamesContext.Provider>
       </VenuesContext.Provider>
     </div>

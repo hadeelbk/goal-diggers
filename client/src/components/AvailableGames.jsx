@@ -3,14 +3,16 @@ import { useContext } from "react";
 import { GamesContext,VenuesContext } from "../App";
 import { format, differenceInCalendarDays } from 'date-fns';
 import NavBar from "./NavBar";
-import { NavLink } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import HostGameForm from "./HostGameForm";
+
 
 function AvailableGames () {
 
   const {sorted} = useContext(GamesContext)
   const venues = useContext(VenuesContext)
 
+ 
   const [filteredGames, setFilteredGames] = useState('')
   const [venueFilter, setVenueFilter] = useState('')
   const [gameTypeFilter, setGameTypeGFilter] = useState('')
@@ -72,6 +74,18 @@ function AvailableGames () {
     return format(new Date(gameTime), 'hh:mm aa' )
   }
 
+  function durationDisplay (duration) {
+    if (duration === 0.5) {
+      return 'Dur: 00:30'
+    } else if (duration === 1) {
+      return ' Dur: 1:00'
+    } else if (duration === 1.5) {
+      return 'Dur: 1:30'
+    } else {
+      return 'Dur: 2:00'
+    }
+  }
+
   return (
     <div className='availableGamesPage'>
       <NavBar/>
@@ -116,7 +130,7 @@ function AvailableGames () {
 
         {filteredGames.length>0 && filteredGames.map(game => (
           <div className='availableGame' key={game._id}>
-            <NavLink to='/game-details'>
+            <NavLink to={`/game-details/${game._id}`}>
             <div className='gameDate'>
               <p>{gameDateDisplay(game.date)}</p>
             </div>
@@ -128,6 +142,7 @@ function AvailableGames () {
                 <p><strong>Kick Off:</strong></p>
                 <br/>
                 <p>{gameTimeDisplay(game.date)}</p>
+                <p>{durationDisplay(game.duration)}</p>
               </div>
               <div className='venueIcon'>
                 <img src="https://cdn-icons-png.flaticon.com/128/17355/17355932.png" alt="Venue icon" className="icon" />

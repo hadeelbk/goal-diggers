@@ -49,9 +49,9 @@ const venues = [
     address: "123 Soccer St, Athens, Greece",
     image:'../football/sport_mania.png'
   }
-]
+];
 
-const Venue = mongoose.model('Venue', RegisteredVenues)
+const Venue = mongoose.model('Venue', RegisteredVenues);
 
 async function populateVenues() {
   try {
@@ -65,7 +65,7 @@ async function populateVenues() {
   } catch (error) {
     console.log(`The table wasn't populated due to: ${error}`);
   }
-}
+};
 
 populateVenues();
 
