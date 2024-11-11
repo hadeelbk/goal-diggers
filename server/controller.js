@@ -18,7 +18,7 @@ async function createGame (req, res) {
     const venue = req.body.venue
     const game = req.body
     const venueDetails = await Venue.findOne({name: venue})
-    const createdGame = await Game.create({venue: venueDetails._id, date: game.date, number_of_players_needed: game.players, game_type: game.game_type, duration: game.duration, price_per_head: game.price_per_head, contact_details: game.contact_details});
+    const createdGame = await Game.create({venue: venueDetails, date: game.date, number_of_players_needed: game.players, game_type: game.game_type, duration: game.duration, price_per_head: game.price_per_head, contact_details: game.contact_details});
     res.status(201).json(createdGame)
   } catch (error) {
     console.error('Error creating game:', error);
@@ -94,6 +94,8 @@ async function joinGame(req, res) {
   const gameId = req.params.gameId;
   const playerUsername = req.body.userName;
 
+  console.log(gameId)
+  console.log(playerUsername)
   try {
     const playerDetail = await Users.findOne({ userName: playerUsername });
     if (!playerDetail) {

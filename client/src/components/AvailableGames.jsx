@@ -11,7 +11,7 @@ function AvailableGames () {
 
   const {sorted} = useContext(GamesContext)
   const venues = useContext(VenuesContext)
-
+  console.log(sorted)
  
   const [filteredGames, setFilteredGames] = useState('')
   const [venueFilter, setVenueFilter] = useState('')

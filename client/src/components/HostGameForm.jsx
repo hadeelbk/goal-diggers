@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
 import {VenuesContext} from '../App'
 import { GamesContext } from "../App";
+import { useNavigate } from 'react-router-dom';
 
 function HostGameForm ({gameVenue, gameType, gameDate}) {
   const venues = useContext(VenuesContext)
   const {games, setGames} = useContext(GamesContext) // needs to be used in submithandle
 
   const basedUrl = 'http://localhost:3000/'
+  const navigate = useNavigate()
 
   const [game, setGame] = useState({
     venue: gameVenue || '',
@@ -30,7 +32,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
   const handleSubmit = async (event) => {
     event.preventDefault()
     const newGame = {...game}
-   
+    console.log(newGame)
     try {
       const response = await fetch(basedUrl+'games', {
         method: 'POST',
@@ -42,7 +44,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
 
       if (response.ok) {
         const createdGame = await response.json();
-        setGames([...games, createdGame]);
+        setGames((prevGames) => [...prevGames, createdGame]);
         setGame({
           venue: '',
           date: '',
@@ -52,6 +54,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
           price_per_head: '',
           contact_details:''
       })
+      // navigate('/available-games')
       }
 
     } catch (error) {

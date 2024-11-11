@@ -11,11 +11,12 @@ const basedUrl = 'http://localhost:3000/'
  const gameId = params.gameId
 
  const [game, setGame] = useState(null)
+ const [userName, setUserName] = useState('')
  const [gameError, setGameError] = useState(null);
 
 
  useEffect(() => {
-
+  console.log('hello')
   const gameFromContext = games.find(game => game._id === gameId);
   
   if (gameFromContext) {
@@ -32,8 +33,39 @@ const basedUrl = 'http://localhost:3000/'
       }
     })();
   }
-},[games]);
+},[games, game]);
 
+
+const handleChange = (event) => {
+  setUserName(event.target.value)
+  console.log(event.target.value)
+}
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  console.log(userName)
+  try {
+    const response = await fetch(basedUrl + 'games/' + gameId, {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+        },
+      body: JSON.stringify({userName}),   
+    })
+    console.log(response.ok)
+    if (response.ok) {
+      const updatedGame = await response.json();
+      console.log(updatedGame)
+      setGame(updatedGame);
+      setUserName(''); 
+    } else {
+      const errorData = await response.json();
+      console.error('Error joining game:', errorData);
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
  function gameDateDisplay (gameDate) {
   return format(new Date(gameDate), "EEEE, MMMM d, uuuu")
@@ -43,7 +75,7 @@ const basedUrl = 'http://localhost:3000/'
   return format(new Date(gameTime), 'hh:mm aa' )
 }
 
-console.log(game)
+
 
 if (game) {
   return (
@@ -89,6 +121,10 @@ if (game) {
         <div className='teamsContainer'>
           <div className='teamInfo'>
             <p>Do you want to play football</p>
+            <form onSubmit={handleSubmit}>
+              <input type='text' placeholder="Add your Username" value={userName} onChange={handleChange}/>
+              <button type='submit'>Join</button>
+            </form>  
           </div>
           <div className="playersList">
             {Array.from({ length: game.number_of_players_needed }).map((_, index) => {
@@ -98,8 +134,8 @@ if (game) {
                   {player ? (
                     <div className="playerInfo">
                       <p>{player.userName}</p>
-                      <p>Position: {player.position}</p>
-                      <p>Name: {player.firstName} {player.lastName}</p>
+                      {/* <p>Position: {player.position}</p>
+                      <p>Name: {player.firstName} {player.lastName}</p> */}
                     </div>
                   ) : (
                     <div className="freeSpot">
