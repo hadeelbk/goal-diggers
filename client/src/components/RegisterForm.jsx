@@ -63,7 +63,7 @@ function RegisterForm () {
           dateOfBirth: '',
           position: ''
         })
-        navigate(`/users/${createdUser._id}`)
+        navigate(`/users/${createdUser._id}`, {replace: true})
       }
     } catch (error) {
       console.log(error)
@@ -72,30 +72,30 @@ function RegisterForm () {
 
   return (
     <div className='registerFormContainer'> 
-      <form className='registerForm' onSubmit={handleSubmit}>
+      <form className='registerForm' onSubmit={handleSubmit} autoComplete="off" >
         <div className='registerFormElement'>
           <label htmlFor="userName">Username</label>
-          <input type='text' name='userName' id='userName' placeholder="Username" value={user.userName} onChange={handleChange}/>
+          <input type='text' name='userName' id='userName' autoComplete="off" placeholder="Username" value={user.userName} onChange={handleChange}/>
         </div>
        
         <div className='registerFormElement'>
           <label htmlFor="firstName">First Name</label>
-          <input type='text' name='firstName' id='firstName' placeholder="First Name" value={user.firstName} onChange={handleChange}/>
+          <input type='text' name='firstName' id='firstName' autoComplete="off" placeholder="First Name" value={user.firstName} onChange={handleChange}/>
         </div>
 
         <div className='registerFormElement'>
           <label htmlFor="lastName">Last Name</label>
-          <input type='text' name='lastName' id='lastName' placeholder="Last Name" value={user.lastName} onChange={handleChange}/>
+          <input type='text' name='lastName' id='lastName'  autoComplete="off" placeholder="Last Name" value={user.lastName} onChange={handleChange}/>
         </div>
 
         <div className='registerFormElement'>
           <label htmlFor="email">Email</label>
-          <input type='text' name='email' id='email' placeholder="Email" value={user.email} onChange={handleChange}/>
+          <input type='text' name='email' id='email' autoComplete="off" placeholder="Email" value={user.email} onChange={handleChange}/>
         </div>
 
         <div className="registerFormElement">
           <label htmlFor="dateOfBirth">Date of Birth</label>
-          <input type='date' name='dateOfBirth' id='dateOfBirth' placeholder="Date of Birth" value={user.dateOfBirth} onChange={handleChange} max={new Date().toISOString().split("T")[0]}/>
+          <input type='date' name='dateOfBirth' id='dateOfBirth' autoComplete="off" placeholder="Date of Birth" value={user.dateOfBirth} onChange={handleChange} max={new Date().toISOString().split("T")[0]}/>
         </div>
         
         <div className='registerFormElement'>
@@ -111,11 +111,11 @@ function RegisterForm () {
 
         <div className='registerFormElement'>
           <label htmlFor='password'>Password</label>
-          <input type='password' name='password' id='password' placeholder="Password" value={user.password} onChange={handleChange} minLength="8" required autoComplete="new-password"/>
+          <input type='password' name='password' id='password' autoComplete="off" placeholder="Password" value={user.password} onChange={handleChange} minLength="8" required autoComplete="new-password"/>
         </div>
 
         <div className='registerFormElement'>
-          <input type='password' name='confirmPassword' id='confirmPassword' placeholder="Password Confirmation" value={user.confirmPassword} onChange={handleChange} minLength="8" required autoComplete="new-password"/>
+          <input type='password' name='confirmPassword' id='confirmPassword' autoComplete="off" placeholder="Password Confirmation" value={user.confirmPassword} onChange={handleChange} minLength="8" required autoComplete="new-password"/>
         </div>
         
         <div className='registerFormElement'>

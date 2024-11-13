@@ -11,43 +11,43 @@ const RegisteredVenues = new Schema({
 const venues = [
   {
     name: 'Arena',
-    address: "123 Soccer St, Athens, Greece",
-    image:'../football/arena.png'
+    address: "Voulis 45, Syntagma, Athens, Greece",
+    image: '../football/arena.png'
   },
   {
     name: 'Diego Football Center',
-    address: "456 Playfield Ave, Kifisia, Athens, Greece",
-    image:'../football/diego.png'
+    address: "Kifisias 36, Kifisia, Athens, Greece",
+    image: '../football/diego.png'
   },
   {
     name: 'El Classico',
-    address: "123 Soccer St, Athens, Greece",
-    image:'../football/el_classico.png'
+    address: "Patriarchou Ioakim 4, Kolonaki, Athens, Greece",
+    image: '../football/el_classico.png'
   },
   {
     name: 'Football Madness',
-    address: "123 Soccer St, Athens, Greece",
-    image:'../football/football.png'
+    address: "Leof. Poseidonos 241, Nea Ionia, Athens, Greece",
+    image: '../football/football.png'
   },
   {
     name: 'Glyfada Goals',
-    address: "123 Soccer St, Athens, Greece",
-    image:'../football/glyfada_goals.png'
+    address: "Saki Karagiorga 57, Glyfada, Athens, Greece",
+    image: '../football/glyfada_goals.png'
   },
   {
     name: 'Kifisia KickOff',
-    address: "123 Soccer St, Athens, Greece",
-    image:'../football/kifisia_kickoff.png'
+    address: "Kifisia 24, Kifisia, Athens, Greece",
+    image: '../football/kifisia_kickoff.png'
   },
   {
     name: 'Olympus Football Gods',
-    address: "123 Soccer St, Athens, Greece",
-    image:'../football/olympus_sports.png'
+    address: "Chatzikosta 7, Zografou, Athens, Greece",
+    image: '../football/olympus_sports.png'
   },
   {
     name: 'Football Mania',
-    address: "123 Soccer St, Athens, Greece",
-    image:'../football/sport_mania.png'
+    address: "Leof. Vouliagmenis 25, Agios Dimitrios, Athens, Greece",
+    image: '../football/sport_mania.png'
   }
 ];
 

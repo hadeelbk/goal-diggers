@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import {VenuesContext} from '../App'
 import { GamesContext } from "../App";
 import { useNavigate } from 'react-router-dom';
+import NavBar from "./NavBar";
 
 function HostGameForm ({gameVenue, gameType, gameDate}) {
   const venues = useContext(VenuesContext)
@@ -13,7 +14,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
   const [game, setGame] = useState({
     venue: gameVenue || '',
     date: gameDate || '',
-    players: '',
+    players_needed: '',
     game_type: gameType || '',
     duration: '',
     price_per_head:'',
@@ -28,7 +29,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
       [name]: value
     })
   }
-
+  console.log(game.players_needed)
   const handleSubmit = async (event) => {
     event.preventDefault()
     const newGame = {...game}
@@ -48,13 +49,14 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
         setGame({
           venue: '',
           date: '',
-          players: '',
+          players_needed: '',
           game_type: '',
           duration: '',
           price_per_head: '',
           contact_details:''
       })
       // navigate('/available-games')
+      navigate(`/game-details/${createdGame._id}`)
       }
 
     } catch (error) {
@@ -64,6 +66,8 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
 
 
     return (
+      <>
+      <NavBar/>
       <div className='hostGameFormContainer'>
         <form className='hostGameForm' onSubmit={handleSubmit}>
           {/* <p>Host your own game!</p> */}
@@ -88,7 +92,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
           <div className='formElement'>
             <label htmlFor="players">PLAYERS:</label>
             <br/>
-            <input type='text' name='players'  id='players' value={game.players} onChange={handleChange} placeholder="Number of players..."/>
+            <input type='text' name='players_needed'  id='players' autoComplete="off" value={game.players_needed} onChange={handleChange} placeholder="Number of players..."/>
           </div>
   
           <div className='formElement'>
@@ -121,7 +125,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
           <div className='formElement'>
             <label htmlFor="contact_details">PHONE NUMBER</label>
             <br/>
-            <input type='text' name='contact_details' id='contactDetails' value={game.contact_details} onChange={handleChange}/>
+            <input type='text' name='contact_details' id='contactDetails' autoComplete="off" value={game.contact_details} onChange={handleChange} />
           </div>
   
           <div className='submit'>
@@ -129,6 +133,7 @@ function HostGameForm ({gameVenue, gameType, gameDate}) {
           </div>
         </form>
       </div>
+      </>
     )
 }
 

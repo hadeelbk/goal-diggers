@@ -28,6 +28,14 @@
   box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2);
 }
 
+#navBar a:hover p {
+  color: rgb(6, 214, 160); 
+}
+
+#navLinks a {
+  text-decoration: none;
+}
+
 #navBar #logo {
   display: flex;
   flex-direction: row;
@@ -39,7 +47,18 @@
   height: 60px;
 }
 
-#navBar p {
+#navLinks {
+  display:  flex;
+  gap: 32px;
+}
+
+#navLinks p {
+  color: white;
+  font-size: 32px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#navBar #logo {
   font-family: Papyrus;
   font-size: 40px;;
   font-style: italic;
@@ -71,6 +90,25 @@
   border: 0cap;
   background-color: rgb(6, 214, 160);
   color: white;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+.userName {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.userName p {
+  color: white;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+#logout {
+  height: 48px;
+  width: 96px;
+  border-radius: 5px;
+  border: 0cap;
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
 }
@@ -138,6 +176,9 @@
   font-family: Roboto;
   font-size: 24px;
   color: rgb(250, 250, 255);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #registeredVenues {
@@ -145,6 +186,15 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
+}
+
+#registeredVenues a {
+  text-decoration: none;
+}
+
+#registeredVenues a:hover img {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
 }
 
 .venue {
@@ -173,18 +223,149 @@
   margin-bottom: 8px;;
 }
 
-
-/* host game form */ 
-
-.hostGameForm {
-  height: 100%;
+/* GamesPerVenue */
+.gamesPerVenueContainer {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  justify-content: flex-end;
+  margin-left:32px;
+  margin-right:32px;
+}
+.venueTitle {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 
+.venueTitle p {
+  font-size: 60px;
+  color: rgb(228, 217, 255);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.venueTitle img {
+  border-radius: 5px;
+  border: solid;
+  border-color: rgb(228, 217, 255);
+}
+.upcomingGames {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.upcomingGames a {
+  text-decoration: none;
+}
+
+
+.notAvailableGames {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.notAvailableGames p {
+ font-family: Roboto;
+ font-size: 32px;
+ color: rgb(199, 125, 255);
+ 
+}
+
+.notAvailableGames img {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: thick;
+  border-color: rgb(199, 125, 255); /* check this instead 6, 214, 160*/
+  transition: all 0.3s ease;
+}
+
+.notAvailableGames a:hover img {
+  border-color: rgb(6, 214, 160); 
+}
+
+/* host game form */ 
+.hostGameFormContainer {
+  height: 100vh;
+  display: flex; 
+  justify-content: center; 
+  /* align-items: center;  */
+  background-image: url('C:/Users/alexc/Codeworks/Senior/goal-diggers/client/football/abigail-keenan-8-s5QuUBtyM-unsplash.jpg');
+  background-size: cover; /* Optional, to cover the entire container */
+  background-position: center; /* Optional, to center the image */
+}
+
+.hostGameForm {
+  display: flex;
+  margin-top: 160px;
+  height: 540px;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: flex-start;
+  align-items: left;
+  min-width: 250px;
+  background-color: rgb(30, 39, 73, 0.3); /* Semi-transparent white background */
+  border: 2px solid #fff; /* White border around the form */
+  padding: 20px; /* Add padding to give some space around the form elements */
+  border-radius: 10px; 
+}
+
+.hostGameForm label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-weight: bold;
+  color: white;
+}
+
+.hostGameForm input {
+  width: 250px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(30, 39, 73);
+  font-size: 16px;
+ }
+
+ .hostGameForm select {
+  width: 250px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(30, 39, 73);
+  font-size: 16px;
+ }
+
+ .submit {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  width: 100%; 
+}
+
+.submit button {
+  width: 200px; 
+  height: 30px;
+  font-size: 18px; 
+  padding: 10px; 
+  background-color: #ff6f61; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.submit button:disabled {
+  background-color: gray; 
+}
+
+.submit button:hover:not(:disabled) {
+  background-color: rgb(30, 39, 73); 
+}
 /* AvailableGames List */ 
 
 .filterContainer {
@@ -223,6 +404,7 @@
   margin-top: 80px;
   margin-left: 250px;
   margin-right: 250px;
+  padding-bottom:32px;
   text-decoration: none;
 }
 
@@ -246,6 +428,8 @@
 
 .gameDetails {
   margin-top: 8px;
+  padding-left:40px;
+  padding-right:40px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -257,9 +441,12 @@
   border-style: solid;
   border-width: thick;
   height: 120px;
+  width: 1500px;
   font-family: 'Montserrat', sans-serif;
   color: rgb(30, 39, 73);
 }
+
+
 
 .kickoffIcon img {
   border-radius: 50%;
@@ -271,15 +458,15 @@
 }
 
 .addressIcon img {
-  height: 80px;
+  height: 70px;
 }
 
 .priceIcon img {
-  height: 60px;
+  height: 70px;
 }
 
 .playerIcon img {
-  height: 80px;
+  height: 70px;
 }
 .extraDetails {
   display: flex;
@@ -298,52 +485,58 @@
 
 
 /* Game Details */ 
-.gameDetailsContainer {
+ .gameDetailsContainer {
   display: flex;
   flex-direction: column;
   gap: 60px;
-  /* font-weight: bold; */
-  font-family: 'Montserrat', sans-serif;
-  color: rgb(228, 217, 255);
-  font-size: 48px;
+  width: 100%;
 }
 
 .gameTitle {
-  background-color: rgb(30, 39, 73);
-  height: 80px;
-  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2);
-  align-content: center;
-  padding-left: 40px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(228, 217, 255);
+  font-size:40px;
+  margin-left: 32px;
 }
+
 .gameInfo {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  gap: 32px;
+  margin-left: 32px;
+  margin-right: 32px;
 }
 
-
 .gameInfoContainer {
+  max-width: 700px;
+  min-width: 700px;
   display: flex;
   flex-direction: column;
-  min-width: 800px;
-  min-height: 400px;
+  /* margin-left: 32px; */
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: rgb(228, 217, 255);
 }
 
 .gameInfoTitle {
   background-color: rgb(123, 44, 191);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  font-size: 48px;
-  padding-left: 8px;
+  font-size: 32px;
+  padding: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  color: rgb(228, 217, 255);
 }
 .gameInfoElement {
+  padding-left:8px;
+  padding-right: 16px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
   height: 100%;
   gap: 32px;
   background-color: rgb(228, 217, 255) ;
@@ -356,12 +549,257 @@
 }
 
 .gameInfoElement img {
-  height: 80px;
+  height: 60px;
+}
+
+.teamsContainer {
+  display:flex; 
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+.teamInfo {
+  min-width: 350px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.teamInfo img {
+  border-radius: 50%;
+  border: solid;
+  border-width: thick;
+  background-color: rgb(228, 217, 255);
+  border-color: rgb(123, 44, 191);
+}
+
+.teamInfo p {
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(228, 217, 255);
+  font-size: 20px;
+}
+
+.teamInfo input {
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(30, 39, 73);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.teamInfo button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color:rgb(228, 217, 255);
+  background-color: rgb(123, 44, 191);
+  border-color: rgb(123, 44, 191);
+  width: 60px;
 }
 
 
-.gameInfoElements {
+.playersList {
+  display: flex;
+  flex-direction: row; /* Set to row for horizontal layout */
+  flex-wrap: wrap; /* Allow wrapping */
+  font-size: 24px;
+  align-items: center;
+  gap: 40px;
+}
+
+.playerSpot {
+  display: flex;
+  display: row;
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+  background-color: rgb(228, 217, 255);
+  border:solid;
+  border-width: thick;
+  padding: 4px;
+  border-color: rgb(6, 214, 160); 
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  width:260px;
+  height: 80px;
+}
+
+.playerIcon {
+  border-radius:  50%;
+  height: 70px;
+}
+
+.freeSpot {
+  display: flex;
+  display: row;
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+  background-color: rgb(228, 217, 255);
+  border:solid;
+  border-width: thick;
+  padding: 4px;
+  border-color: rgb(123, 44, 191);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+}
+
+/* Login Page */
+.loginFormContainer {
+  height: 100vh;
+  display: flex; 
+  justify-content: center; 
+  background-image: url('C:\Users\alexc\Codeworks\Senior\goal-diggers\client\football\jannes-glas-cuhQcfp3By4-unsplash.jpg');
+  background-size: cover; 
+  background-position: center; 
+}
+
+.loginForm {
+  display: flex;
+  margin-top: 160px;
+  height: 250px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  justify-content: flex-start;
+  align-items: left;
+  background-color: rgb(30, 39, 73, 0.3); /* Semi-transparent white background */
+  border: 2px solid #fff; /* White border around the form */
+  padding: 20px; /* Add padding to give some space around the form elements */
+  border-radius: 10px; 
+}
+
+.loginFormElement {
   display: flex;
   flex-direction: column;
 }
 
+.loginForm label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-weight: bold;
+  color: white;
+}
+
+.loginForm input {
+  width: 250px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(30, 39, 73);
+  font-size: 16px;
+ }
+
+ .loginFormElement button {
+  display: flex; /* Make it a flex container */
+  width: 100%; /* Full width of the form */
+}
+
+.loginFormElement button {
+  width: 200px; 
+  height: 30px;
+  font-size: 18px; /* Increase font size */
+  padding: 10px; /* Add padding for better appearance */
+  background-color: #ff6f61; /* Example background color */
+  color: white; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.loginFormElement button:disabled {
+  background-color: gray; /* Disable button background when the form is incomplete */
+}
+
+.loginFormElement button:active:not(:disabled) {
+  background-color: rgb(30, 39, 73); /* Change color on hover */
+}
+
+/* Register Form */
+
+.registerFormContainer {
+  height: 100vh;
+  display: flex; 
+  justify-content: center; 
+  background-image: url('C:\Users\alexc\Codeworks\Senior\goal-diggers\client\football\jannes-glas-cuhQcfp3By4-unsplash.jpg');
+  background-size: cover; 
+  background-position: center; 
+}
+
+.registerForm {
+  display: flex;
+  margin-top: 160px;
+  height: 600px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  justify-content: flex-start;
+  align-items: left;
+  background-color: rgb(30, 39, 73, 0.3); /* Semi-transparent white background */
+  border: 2px solid #fff; /* White border around the form */
+  padding: 20px; /* Add padding to give some space around the form elements */
+  border-radius: 10px; 
+}
+
+.registerFormElement {
+  display: flex;
+  flex-direction: column;
+}
+
+.registerForm label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-weight: bold;
+  color: white;
+}
+
+.registerForm input  {
+  width: 250px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(30, 39, 73);
+  font-size: 16px;
+ }
+ 
+ .registerForm select  {
+  width: 250px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(30, 39, 73);
+  font-size: 16px;
+ }
+
+ .registerElement button {
+  display: flex; /* Make it a flex container */
+  width: 100%; /* Full width of the form */
+}
+
+.registerFormElement button {
+  width: 200px; 
+  height: 30px;
+  font-size: 18px; /* Increase font size */
+  padding: 10px; /* Add padding for better appearance */
+  background-color: #ff6f61; /* Example background color */
+  color: white; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.registerFormElement button:disabled {
+  background-color: gray; /* Disable button background when the form is incomplete */
+}
+
+.registerFormElement button:active:not(:disabled) {
+  background-color: rgb(30, 39, 73); /* Change color on hover */
+}

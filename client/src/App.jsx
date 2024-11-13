@@ -9,7 +9,8 @@ import AvailableGames from './components/AvailableGames';
 import GameDetails from './components/gameDetails';
 import RegisterForm from './components/RegisterForm';
 import LoginPage from './components/LoginPage';
-import UserPage from './components/UserPage';
+import GamesPerVenue from './components/GamesPerVenue';
+import ScrollToTop from './components/ScrollToTop';
 
 export const VenuesContext = React.createContext()
 export const GamesContext = React.createContext()
@@ -23,6 +24,7 @@ function App() {
   const [gameError, setGameError] = useState(null);
   const [userError, setUserError] = useState(null)
   const [sorted, setSorted] = useState([]);
+  const [userLogged, setUserLogged] = useState('')
 
   const basedUrl = 'http://localhost:3000/'
 
@@ -74,17 +76,18 @@ function App() {
 
   return (
     <div className='app'>
+      <ScrollToTop />
       <VenuesContext.Provider value={venues}>
         <GamesContext.Provider value={{games, sorted, setGames}}>
-          <UsersContext.Provider value={{users, setUsers}}>
+          <UsersContext.Provider value={{users, setUsers, userLogged, setUserLogged}}>
             <Routes>
               <Route path='/' element={<Home/>} />
               <Route path='users/register'element={<RegisterForm/>} />
               <Route path='users/login' element={<LoginPage/>} />
-              <Route path='users/:userId' element={<UserPage/>} />
               <Route path='host-game' element={<HostGameForm/>} />
               <Route path='available-games' element={<AvailableGames/>} />
               <Route path='game-details/:gameId' element={<GameDetails/>} />
+              <Route path='venues/:venueId' element={<GamesPerVenue venues={venues}/>}/>
             </Routes>
           </UsersContext.Provider>
         </GamesContext.Provider>
