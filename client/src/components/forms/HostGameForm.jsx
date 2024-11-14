@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import {VenuesContext} from '../../App'
 import { GamesContext } from "../../App";
 import { useNavigate } from 'react-router-dom';
-import NavBar from "./NavBar";
+import NavBar from "../common/NavBar";
 
 function HostGameForm ({gameVenue, gameType, gameDate}) {
   const venues = useContext(VenuesContext)
