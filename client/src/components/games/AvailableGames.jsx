@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-import { GamesContext,VenuesContext } from "../App";
+import { GamesContext,VenuesContext } from "../../App";
 import { format, differenceInCalendarDays } from 'date-fns';
 import NavBar from "./NavBar";
 import { NavLink} from "react-router-dom";

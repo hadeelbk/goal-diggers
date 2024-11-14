@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { GamesContext } from "../App"
+import { GamesContext } from "../../App"
 import { format} from 'date-fns';
 import NavBar from "./NavBar";
 

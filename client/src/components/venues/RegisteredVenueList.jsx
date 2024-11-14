@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import {VenuesContext} from '../App'
+import {VenuesContext} from '../../App'
 import { NavLink } from "react-router-dom";
 
 function RegisteredVenueList () {
