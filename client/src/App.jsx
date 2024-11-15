@@ -4,13 +4,13 @@ import './App.css'
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import HostGameForm from './components/HostGameForm';
-import AvailableGames from './components/AvailableGames';
-import GameDetails from './components/gameDetails';
-import RegisterForm from './components/RegisterForm';
-import LoginPage from './components/LoginPage';
-import GamesPerVenue from './components/GamesPerVenue';
-import ScrollToTop from './components/ScrollToTop';
+import HostGameForm from './components/forms/HostGameForm';
+import AvailableGames from './components/games/AvailableGames';
+import GameDetails from './components/games/GameDetails';
+import RegisterForm from './components/forms/RegisterForm';
+import LoginPage from './pages/LoginPage';
+import GamesPerVenue from './components/games/GamesPerVenue';
+import ScrollToTop from './components/common/ScrollToTop';
 
 export const VenuesContext = React.createContext()
 export const GamesContext = React.createContext()
