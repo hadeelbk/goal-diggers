@@ -11,7 +11,7 @@ This is a football game organizer app that allows users to find or host football
 
 ### Installation
 1. Clone the repository
-2. cd server - npm install - npx nodemon index.js
-3. cd client - npm install - npm dev run
+2. cd server - npm install - npm run dev
+3. cd client - npm install - npm run dev
 
 

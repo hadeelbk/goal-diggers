@@ -292,10 +292,9 @@
   height: 100vh;
   display: flex; 
   justify-content: center; 
-  /* align-items: center;  */
-  background-image: url('C:/Users/alexc/Codeworks/Senior/goal-diggers/client/football/abigail-keenan-8-s5QuUBtyM-unsplash.jpg');
-  background-size: cover; /* Optional, to cover the entire container */
-  background-position: center; /* Optional, to center the image */
+  background-image: url('../assets/abigail-keenan-8-s5QuUBtyM-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .hostGameForm {
@@ -651,7 +650,7 @@
   height: 100vh;
   display: flex; 
   justify-content: center; 
-  background-image: url('C:\Users\alexc\Codeworks\Senior\goal-diggers\client\football\jannes-glas-cuhQcfp3By4-unsplash.jpg');
+  background-image: url(./assets/abigail-keenan-8-s5QuUBtyM-unsplash.jpg);
   background-size: cover; 
   background-position: center; 
 }
@@ -727,7 +726,7 @@
   height: 100vh;
   display: flex; 
   justify-content: center; 
-  background-image: url('C:\Users\alexc\Codeworks\Senior\goal-diggers\client\football\jannes-glas-cuhQcfp3By4-unsplash.jpg');
+  background-image: url(.\assets\jannes-glas-cuhQcfp3By4-unsplash.jpg);
   background-size: cover; 
   background-position: center; 
 }

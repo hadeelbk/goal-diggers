@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 
 function ActionContainer () {
-
-
   return (
     <div id="actionContainer">
     <div id="joinGame">

@@ -1,5 +1,6 @@
 const Game = require('../models/game');
 const Venue = require('../models/venue');
+const User = require('../models/user');
 
 async function createGame(req, res) {
   try {
@@ -17,6 +18,18 @@ async function createGame(req, res) {
     res.status(201).json(game)
   } catch (error) {
     console.error('Error creating game:', error);
+    res.status(500).json({ message: `Internal server issue: ${error}` })
+  }
+}
+
+async function updateGame(req, res) {
+  try {
+    const gameId = req.params.gameId
+    const data = req.body
+    const game = await Game.findByIdAndUpdate(gameId, data, { new: true })
+    res.status(200).json(game)
+  } catch (error) {
+    console.error('Error updating game:', error);
     res.status(500).json({ message: `Internal server issue: ${error}` })
   }
 }
@@ -47,7 +60,7 @@ async function joinGame(req, res) {
   const playerUsername = req.body.userName;
 
   try {
-    const playerDetail = await Users.findOne({ userName: playerUsername });
+    const playerDetail = await User.findOne({ userName: playerUsername });
     if (!playerDetail) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -69,4 +82,4 @@ async function joinGame(req, res) {
   }
 }
 
-module.exports = { createGame, getGames, getGame, joinGame }
+module.exports = { createGame, getGames, getGame, updateGame, joinGame }
