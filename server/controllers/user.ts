@@ -1,12 +1,13 @@
-const Game = require('../models/game.js')
-const Users = require('../models/user.js')
-const bcrypt = require('bcrypt')
+const Game = require('../models/game.js');
+const Users = require('../models/user.js');
+const bcrypt = require('bcrypt');
+import { Request, Response } from 'express';
 
-async function createNewUser(req, res) {
+async function createNewUser(req: Request, res: Response): Promise<void> {
   try {
-    const user = req.body
-    const { password } = req.body
-    const hash = await bcrypt.hash(password, 10)
+    const user = req.body;
+    const { password } = req.body;
+    const hash = await bcrypt.hash(password, 10);
     const newUser = await Users.create({
       userName: user.userName,
       password: hash,
@@ -15,15 +16,15 @@ async function createNewUser(req, res) {
       lastName: user.lastName,
       dateOfBirth: user.dateOfBirth,
       position: user.position
-    })
-    res.status(201).json(newUser)
+    }) as User;
+    res.status(201).json(newUser);
   } catch (error) {
     console.error('Error creating user:', error);
-    res.status(500).json({ message: `Internal server issue: ${error}` })
+    res.status(500).json({ message: `Internal server issue: ${error}` });
   }
 }
 
-async function login(req, res) {
+async function login(req: Request, res: Response): Promise<void | Response> {
   const { usernameOrEmail, password } = req.body;
 
   try {
@@ -40,24 +41,24 @@ async function login(req, res) {
     if (!isMatch) {
       return res.status(400).json({ error: "Invalid password" });
     }
-    res.json({ userId: user._id, username: user.userName, email: user.email })
+    res.json({ userId: user._id, username: user.userName, email: user.email });
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ message: `Internal server issue: ${error}` });
   }
 }
 
-async function getUsers(req, res) {
+async function getUsers(req: Request, res: Response): Promise<void> {
   try {
-    const users = await Users.find()
-    res.status(200).json(users)
+    const users = await Users.find() as [User];
+    res.status(200).json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
-    res.status(500).json({ message: `Internal server issue: ${error}` })
+    res.status(500).json({ message: `Internal server issue: ${error}` });
   }
 }
 
-async function getUser(req, res) {
+async function getUser(req: Request, res: Response): Promise<void> {
   try {
     const user = await Users.findById(req.params.id)
     res.status(200).json(user)
