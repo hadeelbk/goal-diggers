@@ -1,5 +1,6 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import { Schema, Document, Model } from 'mongoose';
 import { Venue as IVenueBase } from '../@types/model/venue';
+import mongoose from '../db';
 
 
 // Extend the Venue interface to include Mongoose-specific fields
@@ -25,7 +26,7 @@ const venues = [
     name: 'Diego assets Center',
     address: 'Kifisias 36, Kifisia, Athens, Greece',
     image: '../assets/diego.png',
-    
+
   },
   {
     name: 'El Classico',
@@ -37,34 +38,35 @@ const venues = [
     name: 'assets Madness',
     address: 'Leof. Poseidonos 241, Nea Ionia, Athens, Greece',
     image: '../assets/assets.png',
-    
+
   },
   {
     name: 'Glyfada Goals',
     address: 'Saki Karagiorga 57, Glyfada, Athens, Greece',
     image: '../assets/glyfada_goals.png',
-    
+
   },
   {
     name: 'Kifisia KickOff',
     address: 'Kifisia 24, Kifisia, Athens, Greece',
     image: '../assets/kifisia_kickoff.png',
-   
+
   },
   {
     name: 'Olympus assets Gods',
     address: 'Chatzikosta 7, Zografou, Athens, Greece',
     image: '../assets/olympus_sports.png',
-   
+
   },
   {
     name: 'assets Mania',
     address: 'Leof. Vouliagmenis 25, Agios Dimitrios, Athens, Greece',
     image: '../assets/sport_mania.png',
-   
+
   },
 ];
 
+const Venue: Model<IVenue> = mongoose.model<IVenue>('Venue', VenueSchema);
 
 const populateVenues = async (): Promise<void> => {
   try {
@@ -82,8 +84,5 @@ const populateVenues = async (): Promise<void> => {
 
 // Call the seeding function
 populateVenues().catch((error) => console.error('Error populating venues:', error));
-
-
-const Venue: Model<IVenue> = mongoose.model<IVenue>('Venue', VenueSchema);
 
 export default Venue;

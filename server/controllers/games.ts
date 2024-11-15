@@ -102,4 +102,4 @@ async function joinGame(req: JoinGameRequest, res: Response): Promise<void> {
   }
 }
 
-export = { createGame, getGames, getGame, joinGame }
+export { createGame, getGames, getGame, joinGame }

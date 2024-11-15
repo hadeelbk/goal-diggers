@@ -1,5 +1,4 @@
-interface User {
-  _id: string;
+export interface User {
   userName: string;
   password: string;
   email: string;
@@ -8,5 +7,3 @@ interface User {
   dateOfBirth: string;
   position: string;
 }
-
-module.exports = User;

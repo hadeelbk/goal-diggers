@@ -15,4 +15,4 @@ router.get('/users', getUsers);
 router.get('/users/:userId', getUser);
 router.post('/login', login);
 
-module.exports = router
+module.exports = router;

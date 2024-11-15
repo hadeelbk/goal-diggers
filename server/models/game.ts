@@ -1,5 +1,6 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import { Schema, Document, Model } from 'mongoose';
 import { Game as IGameBase } from '../@types/model/game';
+import mongoose from '../db';
 
 export interface IGame extends IGameBase, Document {}
 
