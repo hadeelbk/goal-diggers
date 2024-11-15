@@ -1,4 +1,4 @@
-const mongoose = require('../ds.js');
+const mongoose = require('../db.js');
 const {Schema} = mongoose;
 
 const UserSchema = new Schema ({
@@ -11,6 +11,6 @@ const UserSchema = new Schema ({
   position: {type: String, required: true}
 });
 
-const Users = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
-module.exports = Users;
+module.exports = User;
