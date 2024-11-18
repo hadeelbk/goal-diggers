@@ -1,43 +1,49 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { GamesContext } from "../../App"
 import { getGame, joinGame } from "../../services/apiService"
 import { dateDisplay, timeDisplay } from "../../utilities/date-time-display"
 import NavBar from "../common/NavBar"
+import { Game } from '../../@types/game'
 
 function GameDetails() {
   const { games, setGames } = useContext(GamesContext)
-  const { gameId } = useParams()
+  const { gameId } = useParams();
 
-  const [game, setGame] = useState()
+  const [game, setGame] = useState<Game | null>(null)
   const [userName, setUserName] = useState('')
 
   useEffect(() => {
     (async () => {
-      const game = await getGame(gameId);
-      setGame(game);
+      if (gameId) {
+        const game = await getGame(gameId);
+        setGame(game);
+      }
     })();
   }, [gameId])
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
-      console.log(userName);
-      const updatedGame = await joinGame(gameId, { userName });
+      if (!gameId) return;
+      
+      let updatedGame: Game;
+      updatedGame = await joinGame(gameId, { userName });
       setGame(updatedGame);
-      setGames(games.map(game => game._id === gameId ? updatedGame : game));
+      setGames(games.map(game => game.id === gameId ? updatedGame : game));
+      setUserName('');
+      setGame(updatedGame);
+      setGames(games.map(game => game.id === gameId ? updatedGame : game));
       setUserName('');
     } catch (error) {
       console.error("Error joining game:", error);
     }
   }
-
-  console.log('game: ', game);
 
   if (!game) return <div>Loading...</div>
 
@@ -78,7 +84,7 @@ function GameDetails() {
           <div className='teamInfo'>
             <img src="https://cdn-icons-png.flaticon.com/128/2257/2257031.png" alt="location icon" className="icon" />
             <p>Do you want to play football?</p>
-            
+
             {/* !TODO: should be gated by user login */}
             <form onSubmit={handleSubmit}>
               <input type='text' placeholder="Add your Username " value={userName} onChange={handleChange} />

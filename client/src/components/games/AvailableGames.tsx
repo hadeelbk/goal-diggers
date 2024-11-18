@@ -4,13 +4,14 @@ import { GamesContext, VenuesContext } from "../../App";
 import NavBar from "../common/NavBar";
 import { NavLink } from "react-router-dom";
 import { durationDisplay, dateDisplay, timeDisplay } from '../../utilities/date-time-display';
+import { Game } from '../../@types/game';
 
 function AvailableGames() {
   const { games } = useContext(GamesContext)
-  const venues = useContext(VenuesContext)
+  const { venues } = useContext(VenuesContext)
 
-  const [sortedGames, setSortedGames] = useState([])
-  const [filteredGames, setFilteredGames] = useState('')
+  const [sortedGames, setSortedGames] = useState<Game[]>([])
+  const [filteredGames, setFilteredGames] = useState<Game[]>([])
   const [venueFilter, setVenueFilter] = useState('')
   const [gameTypeFilter, setGameTypeGFilter] = useState('')
   const [dateFilter, setDateFilter] = useState('')
@@ -19,12 +20,12 @@ function AvailableGames() {
     const now = new Date();
     const sortedGames = games
       .filter((game) => new Date(game.date) > now) // Filter future games
-      .sort((a, b) => new Date(a.date) - new Date(b.date)); // Sort by date
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sort by date
     setSortedGames(sortedGames);
   }, [games]);
 
   useEffect(() => {
-    let filtered = [];
+    let filtered: Game[] = sortedGames;
 
     if (venueFilter) {
       filtered = sortedGames.filter(game => game.venue.name === venueFilter);
@@ -43,17 +44,18 @@ function AvailableGames() {
   }, [venueFilter, gameTypeFilter, dateFilter, sortedGames]);
 
   /* filter change handlers*/
-  function handleVenueFilterChange(event) {
+
+  function handleVenueFilterChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const venue = event.target.value
     setVenueFilter(venue)
   }
 
-  function handleGameTypeFilterChange(event) {
+  function handleGameTypeFilterChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const gameType = event.target.value
     setGameTypeGFilter(gameType)
   }
 
-  function handleDateFilterChange(event) {
+  function handleDateFilterChange(event: React.ChangeEvent<HTMLInputElement>) {
     const date = event.target.value
     setDateFilter(date)
   }
@@ -71,7 +73,7 @@ function AvailableGames() {
             <select name='venue' id='filterVenue' value={venueFilter} onChange={handleVenueFilterChange}>
               <option value=''>Select a venue</option>
               {venues.map(venue => (
-                <option key={venue._id} value={venue.name}>{venue.name}</option>
+                <option key={venue.name} value={venue.name}>{venue.name}</option>
               ))}
             </select>
           </div>
@@ -94,7 +96,13 @@ function AvailableGames() {
           <div className='filterDate'>
             <label htmlFor='date'>DATE & TIME</label>
             <br />
-            <input type='datetime-local' name='date' id='filterDate' value={dateFilter} onChange={handleDateFilterChange} />
+            <input
+              type='datetime-local'
+              name='date'
+              id='filterDate'
+              value={dateFilter}
+              onChange={handleDateFilterChange}
+            />
           </div>
 
         </form>
@@ -102,14 +110,18 @@ function AvailableGames() {
       <div className='availableGamesContainer'>
 
         {filteredGames.length > 0 && filteredGames.map(game => (
-          <div className='availableGame' key={game._id}>
-            <NavLink to={`/game-details/${game._id}`}>
+          <div className='availableGame' key={game.id}>
+            <NavLink to={`/game-details/${game.id}`}>
               <div className='gameDate'>
                 <p>{dateDisplay(game.date)}</p>
               </div>
               <div className='gameDetails'>
                 <div className='kickoffIcon'>
-                  <img src="https://cdn-icons-png.flaticon.com/128/13604/13604235.png" alt="Kick-off icon" className="icon" />
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/13604/13604235.png"
+                    alt="Kick-off icon"
+                    className="icon"
+                  />
                 </div>
                 <div className='gameTime'>
                   <p><strong>Kick Off:</strong> {timeDisplay(game.date)}</p>
@@ -118,25 +130,41 @@ function AvailableGames() {
                   <p><strong>Duration:</strong> {durationDisplay(game.duration)}h</p>
                 </div>
                 <div className='venueIcon'>
-                  <img src="https://cdn-icons-png.flaticon.com/128/17355/17355932.png" alt="Venue icon" className="icon" />
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/17355/17355932.png"
+                    alt="Venue icon"
+                    className="icon"
+                  />
                 </div>
                 <div className='gameVenue'>
                   <p>{game.venue.name}</p>
                 </div>
                 <div className='addressIcon'>
-                  <img src="https://cdn-icons-png.flaticon.com/128/17296/17296756.png" alt="Address icon" className="icon" />
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/17296/17296756.png"
+                    alt="Address icon"
+                    className="icon"
+                  />
                 </div>
                 <div className='venueAddress'>
                   <p>{game.venue.address}</p>
                 </div>
                 <div className='priceIcon'>
-                  <img src="https://cdn-icons-png.flaticon.com/128/9099/9099413.png" alt="Price icon" className="icon" />
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/9099/9099413.png"
+                    alt="Price icon"
+                    className="icon"
+                  />
                 </div>
                 <div className='gamePrice'>
                   <p>{game.price_per_head}€</p>
                 </div>
                 <div className='playerIcon'>
-                  <img src="https://cdn-icons-png.flaticon.com/128/2112/2112139.png" alt="Player icon" className="icon" />
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/2112/2112139.png"
+                    alt="Player icon"
+                    className="icon"
+                  />
                 </div>
                 <div className='extraDetails'>
                   <div className='gameType'>
@@ -154,7 +182,11 @@ function AvailableGames() {
           <div className='notAvailableGames'>
             <p>Don’t see any games? Take the lead and host one of your own!</p>
             <NavLink to="/host-game">
-              <img src="https://cdn-icons-png.flaticon.com/512/1286/1286241.png" alt="Pitch icon" className="logo" />
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1286/1286241.png"
+                alt="Pitch icon"
+                className="logo"
+              />
             </NavLink>
           </div>
         }

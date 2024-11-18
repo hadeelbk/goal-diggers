@@ -3,54 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import { GamesContext, VenuesContext } from '../../App';
 import { createGame } from '../../services/apiService';
 import NavBar from '../common/NavBar';
+import { Venue } from '../../@types/venue';
+import { Game } from '../../@types/game';
 
 function HostGameForm() {
   const navigate = useNavigate()
-  const venues = useContext(VenuesContext)
+  const venues: Venue[] = useContext(VenuesContext).venues;
   const { games, setGames } = useContext(GamesContext)
-  const [newGame, setNewGame] = useState({
-    venue: '',
-    date: '',
-    players_needed: '',
-    game_type: '',
-    duration: '',
-    price_per_head: '',
-    contact_details: ''
-  });
+  const [newGame, setNewGame] = useState<Game | null>(null);
 
-  const isFormComplete = Object.values(newGame).every(value => value !== '');
+  const isFormComplete = newGame && Object.values(newGame).every(value => value !== '');
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
-    setNewGame({
+    newGame && setNewGame({
       ...newGame,
-      [name]: value
+      [name]: name === 'players_needed' ? Number(value) : value
     })
   }
 
-  const clearForm = () => {
-    setNewGame({
-      venue: '',
-      date: '',
-      players_needed: '',
-      game_type: '',
-      duration: '',
-      price_per_head: '',
-      contact_details: ''
-    })
-  }
+  const clearForm = () => setNewGame(null);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    try {
-      const createdGame = await createGame(newGame);
-      setGames([...games, createdGame]);
-      clearForm();
-      navigate(`/game-details/${createdGame._id}`);
-    } catch (error) {
-      console.error("Error creating game:", error);
+    if (newGame) {
+      try {
+        const createdGame = await createGame(newGame);
+        setGames([...games, createdGame]);
+        clearForm();
+        navigate(`/game-details/${createdGame._id}`);
+      } catch (error) {
+        console.error("Error creating game:", error);
+      }
     }
-  };  
+  };
 
   return (
     <>
@@ -63,12 +49,12 @@ function HostGameForm() {
             <select
               name='venue'
               id='venue'
-              value={newGame.venue}
+              value={newGame?.venue.name}
               onChange={handleChange}
             >
               <option value=''>Select a venue</option>
-              {venues.map(venue => (
-                <option key={venue._id} value={venue.name}>{venue.name}</option>
+              {venues.map((venue: Venue) => (
+                <option key={venue.name} value={venue.name}>{venue.name}</option>
               ))}
             </select>
           </div>
@@ -80,7 +66,7 @@ function HostGameForm() {
               type='datetime-local'
               name='date'
               id='date'
-              value={newGame.date}
+              value={newGame?.date}
               onChange={handleChange}
               min={new Date().toISOString().slice(0, 16)}
             />
@@ -93,7 +79,7 @@ function HostGameForm() {
               type='text'
               name='players_needed'
               id='players'
-              value={newGame.players_needed}
+              value={newGame?.number_of_players_needed}
               onChange={handleChange}
               placeholder='Number of players...'
             />
@@ -102,7 +88,7 @@ function HostGameForm() {
           <div className='formElement'>
             <label htmlFor='gametype'>GAME TYPE:</label>
             <br />
-            <select name='game_type' id='gameType' value={newGame.game_type} onChange={handleChange}>
+            <select name='game_type' id='gameType' value={newGame?.game_type} onChange={handleChange}>
               <option value=''>Select a game type</option>
               <option value='5-a-side'>5-a-side</option>
               <option value='6-a-side'>6-a-side</option>
@@ -125,7 +111,7 @@ function HostGameForm() {
               max='2'
               placeholder='0'
               step='0.5'
-              value={newGame.duration}
+              value={newGame?.duration}
               onChange={handleChange}
             />
           </div>
@@ -140,7 +126,7 @@ function HostGameForm() {
               min='0'
               placeholder='0'
               step='0.5'
-              value={newGame.price_per_head}
+              value={newGame?.price_per_head}
               onChange={handleChange}
             />
           </div>
@@ -152,7 +138,7 @@ function HostGameForm() {
               type='text'
               name='contact_details'
               id='contactDetails'
-              value={newGame.contact_details}
+              value={newGame?.contact_details}
               onChange={handleChange}
             />
           </div>

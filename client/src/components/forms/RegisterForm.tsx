@@ -22,7 +22,7 @@ function RegisterForm() {
     Object.values(newUser).every(value => value !== '') &&
     newUser.password === newUser.confirmPassword;
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target
 
     setNewUser({
@@ -31,7 +31,7 @@ function RegisterForm() {
     });
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
     if (newUser.password !== newUser.confirmPassword) {
@@ -154,7 +154,7 @@ function RegisterForm() {
             placeholder='Password'
             value={newUser.password}
             onChange={handleChange}
-            minLength='8'
+            minLength={8}
             required
             autoComplete='off'
           />
@@ -169,7 +169,7 @@ function RegisterForm() {
             placeholder='Password Confirmation'
             value={newUser.confirmPassword}
             onChange={handleChange}
-            minLength='8'
+            minLength={8}
             required
           />
         </div>

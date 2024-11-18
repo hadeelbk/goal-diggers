@@ -1,16 +1,19 @@
 import { NavLink } from "react-router-dom";
-import { UserContext } from "../../App";
 import { useContext } from "react";
+import { UserContext } from '../../App';
 
 function NavBar() {
   const { user, setUser } = useContext(UserContext)
-
-  const handleLogout = () => setUser('');
+  const handleLogout = () => setUser(null);
 
   return (
     <div id='navBar'>
       <div id='logo'>
-        <img src="https://cdn-icons-png.flaticon.com/128/2642/2642160.png" alt="Pitch icon" className='logo' />
+        <img
+          className='logo'
+          src="https://cdn-icons-png.flaticon.com/128/2642/2642160.png"
+          alt="Pitch icon"
+        />
         <p>GOAL Diggers</p>
       </div>
       <div id='navLinks'>
@@ -27,7 +30,7 @@ function NavBar() {
       <div className='navBarButtons'>
         {user ? (
           <div className='userName'>
-            <p>{user}</p>
+            <p>{user.userName}</p>
             <button id="logout" onClick={handleLogout} style={{ cursor: "pointer" }}>
               Logout
             </button>
