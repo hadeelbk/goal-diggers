@@ -63,7 +63,7 @@ async function getUsers(req: Request, res: Response): Promise<void> {
 
 async function getUser(req: Request, res: Response): Promise<void> {
   try {
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.userId)
     res.status(200).json(user)
   } catch (error) {
     console.error('Error fetching user:', error);
