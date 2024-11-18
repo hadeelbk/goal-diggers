@@ -39,10 +39,14 @@ function RegisterForm() {
       return;
     }
 
-    const createdUser = await registerUser(newUser)
-    setUser(createdUser);
-    cleanForm();
-    navigate(`/users/${createdUser._id}`, { replace: true })
+    try {
+      const createdUser = await registerUser(newUser);
+      setUser(createdUser);
+      cleanForm();
+      navigate(`/users/${createdUser._id}`, { replace: true })
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   }
 
   const cleanForm = () => {
@@ -152,7 +156,7 @@ function RegisterForm() {
             onChange={handleChange}
             minLength='8'
             required
-            autoComplete='new-password'
+            autoComplete='off'
           />
         </div>
 

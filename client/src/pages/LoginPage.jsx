@@ -24,22 +24,22 @@ function LoginPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { usernameOrEmail, password } = login;
-
+  
     try {
-      const response = await loginUser({ usernameOrEmail, password });
-
-      if (response.ok) {
-        const user = await response.json();
-        console.log('Logged in user:', user); //Navigate to userPage!! mayin the response of the request include the id to use it as param 
-        navigate(`/`, { replace: true })
-        setUser(user)
-      } else {
-        alert('Invalid username/email or password.')
+      const user = await loginUser({ usernameOrEmail, password });
+  
+      if (user?.error) {
+        alert(user.error || "Invalid username/email or password.");
+      } else if (user) {
+        console.log('Logged in user:', user);
+        setUser(user);
+        navigate(`/`, { replace: true });
       }
     } catch (error) {
-      console.log(error);
+      console.error("Login error:", error);
+      alert("Something went wrong. Please try again later.");
     }
-  }
+  };
 
   return (
     <div className="loginFormContainer">

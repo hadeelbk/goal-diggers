@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { GamesContext, VenuesContext } from "../../App";
 import NavBar from "../common/NavBar";
-import { dateDisplay, durationDisplay, timeDisplay } from '../../utillites/date-time-display';
+import { dateDisplay, durationDisplay, timeDisplay } from '../../utilities/date-time-display';
 
 function GamesPerVenue() {
   const { games } = useContext(GamesContext)
@@ -17,7 +17,7 @@ function GamesPerVenue() {
 
     const venue = venues.find(venue => venue._id === venueId)
     setVenue(venue)
-  }, [games, venueId, venues])
+  }, [games])
 
   return (
     <>

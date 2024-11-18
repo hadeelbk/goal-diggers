@@ -43,7 +43,7 @@ function HostGameForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const createdGame = await createGame(newGame); // No need for .json() if it's already JSON
+      const createdGame = await createGame(newGame);
       setGames([...games, createdGame]);
       clearForm();
       navigate(`/game-details/${createdGame._id}`);

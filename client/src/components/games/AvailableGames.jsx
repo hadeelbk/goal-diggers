@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { GamesContext, VenuesContext } from "../../App";
 import NavBar from "../common/NavBar";
 import { NavLink } from "react-router-dom";
-import { durationDisplay, dateDisplay, timeDisplay } from '../../utillites/date-time-display';
+import { durationDisplay, dateDisplay, timeDisplay } from '../../utilities/date-time-display';
 
 function AvailableGames() {
   const { games } = useContext(GamesContext)

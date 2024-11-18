@@ -22,18 +22,6 @@ async function createGame(req, res) {
   }
 }
 
-async function updateGame(req, res) {
-  try {
-    const gameId = req.params.gameId
-    const data = req.body
-    const game = await Game.findByIdAndUpdate(gameId, data, { new: true })
-    res.status(200).json(game)
-  } catch (error) {
-    console.error('Error updating game:', error);
-    res.status(500).json({ message: `Internal server issue: ${error}` })
-  }
-}
-
 async function getGames(req, res) {
   try {
     const games = await Game.find().populate('venue').populate('players')
@@ -82,4 +70,4 @@ async function joinGame(req, res) {
   }
 }
 
-module.exports = { createGame, getGames, getGame, updateGame, joinGame }
+module.exports = { createGame, getGames, getGame, joinGame }

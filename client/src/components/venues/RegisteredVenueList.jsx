@@ -42,7 +42,7 @@ function RegisteredVenueList() {
             <NavLink to={`venues/${venue._id}`}>
               <img
                 src={imageMap[venue.image] || "https://via.placeholder.com/250"}
-                alt={venue.image}
+                alt={venue.name}
                 height='250'
               />
               <p id='venueName'>{venue.name}</p>

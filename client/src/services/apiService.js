@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000"
+const BASE_URL = "http://localhost:3000"
 
 export const getVenues = () => {
   return fetchData("/venues")
@@ -18,10 +18,6 @@ export const joinGame = (id, body) => {
 
 export const createGame = (body) => {
   return fetchData("/games", "POST", body)
-}
-
-export const updateGame = (id, body) => {
-  return fetchData("/games/" + id, "PUT", body)
 }
 
 export const getUser = (id) => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const { getVenues } = require('./controllers/venues');
-const { createGame, getGames, getGame, joinGame, updateGame } = require('./controllers/games');
+const { createGame, getGames, getGame, joinGame } = require('./controllers/games');
 const { createNewUser, getUsers, getUser, login } = require('./controllers/user');
 
 const router = express.Router();

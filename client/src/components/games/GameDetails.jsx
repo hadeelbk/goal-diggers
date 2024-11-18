@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { GamesContext } from "../../App"
 import { getGame, joinGame } from "../../services/apiService"
-import { dateDisplay, timeDisplay } from "../../utillites/date-time-display"
+import { dateDisplay, timeDisplay } from "../../utilities/date-time-display"
 import NavBar from "../common/NavBar"
 
 function GameDetails() {
