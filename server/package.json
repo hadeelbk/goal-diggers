@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "export NODE_ENV=TEST && jest",
-    "dev": "export NODE_ENV=DEV && ts-node index.ts"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node index.ts"
   },
   "keywords": [],
   "author": "",
