@@ -1,5 +1,6 @@
 const Game = require('../models/game');
 const Venue = require('../models/venue');
+const User = require('../models/user');
 
 async function createGame(req, res) {
   try {
@@ -47,7 +48,7 @@ async function joinGame(req, res) {
   const playerUsername = req.body.userName;
 
   try {
-    const playerDetail = await Users.findOne({ userName: playerUsername });
+    const playerDetail = await User.findOne({ userName: playerUsername });
     if (!playerDetail) {
       return res.status(404).json({ error: "User not found" });
     }

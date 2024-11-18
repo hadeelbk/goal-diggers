@@ -27,8 +27,8 @@ async function login(req, res) {
   const { usernameOrEmail, password } = req.body;
 
   try {
-    let user = await Users.findOne({ 
-      $or: [{ userName: usernameOrEmail }, { email: usernameOrEmail }] 
+    let user = await Users.findOne({
+      $or: [{ userName: usernameOrEmail }, { email: usernameOrEmail }]
     });
 
     if (!user) {
@@ -57,4 +57,14 @@ async function getUsers(req, res) {
   }
 }
 
-module.exports = { createNewUser, login, getUsers }
+async function getUser(req, res) {
+  try {
+    const user = await Users.findById(req.params.id)
+    res.status(200).json(user)
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ message: `Internal server issue: ${error}` })
+  }
+}
+
+module.exports = { createNewUser, login, getUsers, getUser }
