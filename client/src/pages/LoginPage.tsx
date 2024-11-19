@@ -12,7 +12,7 @@ function LoginPage() {
 
   const navigate = useNavigate()
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
     setLogin({
@@ -21,7 +21,7 @@ function LoginPage() {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const { usernameOrEmail, password } = login;
   

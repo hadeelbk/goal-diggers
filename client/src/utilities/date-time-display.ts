@@ -1,6 +1,6 @@
 import { format, differenceInCalendarDays } from 'date-fns';
 
-export function dateDisplay(date) {
+export function dateDisplay(date: string) {
   const today = new Date()
   const daysDiff = differenceInCalendarDays(new Date(date), today)
 
@@ -13,11 +13,11 @@ export function dateDisplay(date) {
   }
 }
 
-export function timeDisplay(time) {
+export function timeDisplay(time: string) {
   return format(new Date(time), 'hh:mm aa')
 }
 
-export function durationDisplay(duration) {
+export function durationDisplay(duration: number) {
   if (duration === 0.5) {
     return '00:30'
   } else if (duration === 1) {

@@ -19,50 +19,49 @@ const venues = [
   {
     name: 'Arena',
     address: 'Voulis 45, Syntagma, Athens, Greece',
-    image: '../assets/arena.png',
+    image: 'arena',
     capacity: 1000, // Add capacity if needed
   },
   {
     name: 'Diego assets Center',
     address: 'Kifisias 36, Kifisia, Athens, Greece',
-    image: '../assets/diego.png',
+    image: 'diego',
 
   },
   {
     name: 'El Classico',
     address: 'Patriarchou Ioakim 4, Kolonaki, Athens, Greece',
-    image: '../assets/el_classico.png',
+    image: 'el_classico',
 
   },
   {
     name: 'assets Madness',
     address: 'Leof. Poseidonos 241, Nea Ionia, Athens, Greece',
-    image: '../assets/assets.png',
+    image: 'football_madness',
 
   },
   {
     name: 'Glyfada Goals',
     address: 'Saki Karagiorga 57, Glyfada, Athens, Greece',
-    image: '../assets/glyfada_goals.png',
+    image: 'glyfada_goals',
 
   },
   {
     name: 'Kifisia KickOff',
     address: 'Kifisia 24, Kifisia, Athens, Greece',
-    image: '../assets/kifisia_kickoff.png',
+    image: 'kifisia_kickoff',
 
   },
   {
     name: 'Olympus assets Gods',
     address: 'Chatzikosta 7, Zografou, Athens, Greece',
-    image: '../assets/olympus_sports.png',
+    image: 'olympus_sports',
 
   },
   {
     name: 'assets Mania',
     address: 'Leof. Vouliagmenis 25, Agios Dimitrios, Athens, Greece',
-    image: '../assets/sport_mania.png',
-
+    image: 'sport_mania',
   },
 ];
 
@@ -71,6 +70,7 @@ const Venue: Model<IVenue> = mongoose.model<IVenue>('Venue', VenueSchema);
 const populateVenues = async (): Promise<void> => {
   try {
     const existingVenues = await Venue.countDocuments();
+    console.log(existingVenues);
     if (existingVenues === 0) {
       await Venue.insertMany(venues);
       console.log('The venues collection was populated successfully.');

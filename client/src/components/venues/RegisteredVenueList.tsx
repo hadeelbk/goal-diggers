@@ -10,7 +10,7 @@ import kifisia_kickoff from '../../assets/kifisia_kickoff.png';
 import olympus_sports from '../../assets/olympus_sports.png';
 import sport_mania from '../../assets/sport_mania.png';
 
-const imageMap = {
+const imageMap: { [key: string]: string } = {
   "arena": arena,
   "diego": diego,
   "el_classico": el_classico,
@@ -22,7 +22,7 @@ const imageMap = {
 };
 
 function RegisteredVenueList() {
-  const venues = useContext(VenuesContext)
+  const { venues } = useContext(VenuesContext);
 
   return (
     <div id='venueList'>
@@ -37,11 +37,11 @@ function RegisteredVenueList() {
         />
       </p>
       <div id='registeredVenues'>
-        {venues.map((venue) => (
-          <div className='venue' key={venue._id}>
+        {venues && venues.map((venue) => (
+          <div className='venue' key={venue.name}>
             <NavLink to={`venues/${venue._id}`}>
               <img
-                src={imageMap[venue.image] || "https://via.placeholder.com/250"}
+                src={imageMap[venue.image]}
                 alt={venue.name}
                 height='250'
               />

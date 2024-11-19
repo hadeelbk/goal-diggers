@@ -9,20 +9,27 @@ import GameDetails from './components/games/GameDetails';
 import GamesPerVenue from './components/games/GamesPerVenue';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import { getUser, getVenues, getGames } from './services/apiService';
+import { getVenues, getGames } from './services/apiService';
+import { Game } from './@types/game';
+import { User } from './@types/user';
+import { Venue } from './@types/venue';
 
-export const VenuesContext = React.createContext()
-export const UserContext = React.createContext()
-export const GamesContext = React.createContext()
+export const VenuesContext = React.createContext<{venues: Venue[]}>({ venues: [] })
+
+export const GamesContext = React.createContext<{
+  games: Game[],
+  setGames: React.Dispatch<React.SetStateAction<Game[]>>
+}>({ games: [], setGames: () => { } })
+
+export const UserContext = React.createContext<{
+  user: User | null,
+  setUser: React.Dispatch<React.SetStateAction<User | null>>
+}>({ user: null, setUser: () => { } })
 
 function App() {
   const [venues, setVenues] = useState([])
-  const [user, setUser] = useState([])
-  const [games, setGames] = useState([])
-
-  useEffect(() => {
-    getUser().then(data => setUser(data))
-  }, [])
+  const [games, setGames] = useState<Game[]>([])
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     getVenues().then(data => setVenues(data))
@@ -35,7 +42,7 @@ function App() {
   return (
     <div className='app'>
       <ScrollToTop />
-      <VenuesContext.Provider value={venues}>
+      <VenuesContext.Provider value={{ venues }}>
         <UserContext.Provider value={{ user, setUser }}>
           <GamesContext.Provider value={{ games, setGames }}>
             <Routes>
@@ -51,7 +58,7 @@ function App() {
           </GamesContext.Provider>
         </UserContext.Provider>
       </VenuesContext.Provider>
-    </div>
+    </div >
   )
 }
 

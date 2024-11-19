@@ -1,34 +1,50 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { GamesContext } from "../../App"
 import { getGame, joinGame } from "../../services/apiService"
 import { dateDisplay, timeDisplay } from "../../utilities/date-time-display"
 import NavBar from "../common/NavBar"
+import { Game } from '../../@types/game'
 
 function GameDetails() {
   const { games, setGames } = useContext(GamesContext)
-  const { gameId } = useParams()
+  const { gameId } = useParams();
 
-  const [game, setGame] = useState()
+  const [game, setGame] = useState<Game | null>(null)
   const [userName, setUserName] = useState('')
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    (async () => {
-      const game = await getGame(gameId);
-      setGame(game);
-    })();
-  }, [gameId])
+    const fetchGame = async () => {
+      if (!gameId) return;
 
-  const handleChange = (event) => {
+      try {
+        const fetchedGame = await getGame(gameId);
+        setGame(fetchedGame);
+      } catch (error) {
+        console.error("Failed to fetch game details:", error);
+        setError("Unable to load game details. Please try again later.");
+        setGame(null); // Assuming you want to reset the game details or handle this case differently
+      }
+    };
+
+    fetchGame();
+  }, [gameId]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
-      console.log(userName);
-      const updatedGame = await joinGame(gameId, { userName });
+      if (!gameId) return;
+
+      const updatedGame = await joinGame(gameId, { userName }) as Game;
+      setGame(updatedGame);
+      setGames(games.map(game => game._id === gameId ? updatedGame : game));
+      setUserName('');
       setGame(updatedGame);
       setGames(games.map(game => game._id === gameId ? updatedGame : game));
       setUserName('');
@@ -37,7 +53,9 @@ function GameDetails() {
     }
   }
 
-  console.log('game: ', game);
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   if (!game) return <div>Loading...</div>
 
@@ -78,7 +96,7 @@ function GameDetails() {
           <div className='teamInfo'>
             <img src="https://cdn-icons-png.flaticon.com/128/2257/2257031.png" alt="location icon" className="icon" />
             <p>Do you want to play football?</p>
-            
+
             {/* !TODO: should be gated by user login */}
             <form onSubmit={handleSubmit}>
               <input type='text' placeholder="Add your Username " value={userName} onChange={handleChange} />
