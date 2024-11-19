@@ -2,7 +2,7 @@ import { Player } from './player';
 import { Venue } from './venue';
 
 export interface Game {
-  id: string;
+  _id: string; 
   venue: Venue;
   date: string;
   number_of_players_needed: number;

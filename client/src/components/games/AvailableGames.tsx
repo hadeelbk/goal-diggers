@@ -110,8 +110,8 @@ function AvailableGames() {
       <div className='availableGamesContainer'>
 
         {filteredGames.length > 0 && filteredGames.map(game => (
-          <div className='availableGame' key={game.id}>
-            <NavLink to={`/game-details/${game.id}`}>
+          <div className='availableGame' key={game._id}>
+            <NavLink to={`/game-details/${game._id}`}>
               <div className='gameDate'>
                 <p>{dateDisplay(game.date)}</p>
               </div>

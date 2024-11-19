@@ -22,7 +22,17 @@ export const joinGame = (id: string, body: JoinGame) => {
   return fetchData('/games/' + id, 'PUT', body)
 }
 
-export const createGame = (body: Game) => {
+export interface CreateGame {
+  venue: string;
+  date: string;
+  number_of_players_needed: number;
+  game_type: string;
+  duration: number;
+  price_per_head: number;
+  contact_details: string;
+}
+
+export const createGame = (body: CreateGame) => {
   return fetchData('/games', 'POST', body)
 }
 
@@ -44,7 +54,7 @@ export const loginUser = (body: UserLogin) => {
 }
 
 interface UserRegistration {
-  username: string;
+  userName: string;
   password: string;
   email: string;
 }

@@ -12,15 +12,24 @@ function GameDetails() {
 
   const [game, setGame] = useState<Game | null>(null)
   const [userName, setUserName] = useState('')
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    (async () => {
-      if (gameId) {
-        const game = await getGame(gameId);
-        setGame(game);
+    const fetchGame = async () => {
+      if (!gameId) return;
+
+      try {
+        const fetchedGame = await getGame(gameId);
+        setGame(fetchedGame);
+      } catch (error) {
+        console.error("Failed to fetch game details:", error);
+        setError("Unable to load game details. Please try again later.");
+        setGame(null); // Assuming you want to reset the game details or handle this case differently
       }
-    })();
-  }, [gameId])
+    };
+
+    fetchGame();
+  }, [gameId]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
@@ -31,18 +40,21 @@ function GameDetails() {
 
     try {
       if (!gameId) return;
-      
-      let updatedGame: Game;
-      updatedGame = await joinGame(gameId, { userName });
+
+      const updatedGame = await joinGame(gameId, { userName }) as Game;
       setGame(updatedGame);
-      setGames(games.map(game => game.id === gameId ? updatedGame : game));
+      setGames(games.map(game => game._id === gameId ? updatedGame : game));
       setUserName('');
       setGame(updatedGame);
-      setGames(games.map(game => game.id === gameId ? updatedGame : game));
+      setGames(games.map(game => game._id === gameId ? updatedGame : game));
       setUserName('');
     } catch (error) {
       console.error("Error joining game:", error);
     }
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   if (!game) return <div>Loading...</div>

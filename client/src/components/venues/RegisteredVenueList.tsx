@@ -39,7 +39,7 @@ function RegisteredVenueList() {
       <div id='registeredVenues'>
         {venues && venues.map((venue) => (
           <div className='venue' key={venue.name}>
-            <NavLink to={`venues/${venue.id}`}>
+            <NavLink to={`venues/${venue._id}`}>
               <img
                 src={imageMap[venue.image]}
                 alt={venue.name}

@@ -37,7 +37,7 @@ const venues = [
   {
     name: 'assets Madness',
     address: 'Leof. Poseidonos 241, Nea Ionia, Athens, Greece',
-    image: 'football-madness',
+    image: 'football_madness',
 
   },
   {
