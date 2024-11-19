@@ -11,17 +11,27 @@ function HostGameForm() {
   const { venues } = useContext(VenuesContext);
   const { games, setGames } = useContext(GamesContext);
 
-  const initialGame = {
+  type NewGame = {
+    venue: string,
+    date: string,
+    number_of_players_needed: string | number,
+    game_type: string,
+    duration: string | number,
+    price_per_head: string | number,
+    contact_details: string
+  }
+
+  const initialGame:NewGame = {
     venue: '',
     date: '',
-    number_of_players_needed: '' as unknown as number,
+    number_of_players_needed: '',
     game_type: '',
-    duration: '' as unknown as number,
-    price_per_head: '' as unknown as number,
+    duration: '',
+    price_per_head: '',
     contact_details: ''
   };
 
-  const [newGame, setNewGame] = useState(initialGame);
+  const [newGame, setNewGame] = useState<NewGame>(initialGame);
 
   const isFormComplete = Object.entries(newGame).every(([key, value]) => {
     if (['number_of_players_needed', 'duration', 'price_per_head'].includes(key)) {
@@ -41,7 +51,10 @@ function HostGameForm() {
     event.preventDefault();
     if (isFormComplete) {
       try {
-        const createdGame = await createGame(newGame);
+        newGame.number_of_players_needed = Number(newGame.number_of_players_needed)
+        newGame.duration = Number(newGame.duration)
+        newGame.price_per_head = Number(newGame.price_per_head)
+        const createdGame: Game = await createGame(newGame as CreateGame);
         setGames([...games, createdGame]);
         clearForm();
         navigate(`/game-details/${createdGame._id}`);
