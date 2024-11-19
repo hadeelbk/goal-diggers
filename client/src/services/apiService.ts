@@ -25,7 +25,7 @@ export const joinGame = (id: string, body: JoinGame) => {
 export interface CreateGame {
   venue: string;
   date: string;
-  number_of_players_needed: number;
+  players_needed: number;
   game_type: string;
   duration: number;
   price_per_head: number;

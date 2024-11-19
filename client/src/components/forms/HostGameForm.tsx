@@ -14,7 +14,7 @@ function HostGameForm() {
   type NewGame = {
     venue: string,
     date: string,
-    number_of_players_needed: string | number,
+    players_needed: string | number,
     game_type: string,
     duration: string | number,
     price_per_head: string | number,
@@ -24,14 +24,14 @@ function HostGameForm() {
   const initialGame:NewGame = {
     venue: '',
     date: '',
-    number_of_players_needed: '',
+    players_needed: '',
     game_type: '',
     duration: '',
     price_per_head: '',
     contact_details: ''
   };
 
-  const [newGame, setNewGame] = useState<NewGame>(initialGame);
+  const [newGame, setNewGame] = useState(initialGame);
 
   const isFormComplete = Object.entries(newGame).every(([key, value]) => {
     if (['number_of_players_needed', 'duration', 'price_per_head'].includes(key)) {
@@ -51,7 +51,7 @@ function HostGameForm() {
     event.preventDefault();
     if (isFormComplete) {
       try {
-        newGame.number_of_players_needed = Number(newGame.number_of_players_needed)
+        newGame.players_needed = Number(newGame.players_needed)
         newGame.duration = Number(newGame.duration)
         newGame.price_per_head = Number(newGame.price_per_head)
         const createdGame: Game = await createGame(newGame as CreateGame);
@@ -105,7 +105,7 @@ function HostGameForm() {
               type='number'
               name='players_needed'
               id='players_needed'
-              value={newGame.number_of_players_needed}
+              value={newGame.players_needed}
               onChange={handleChange}
               min="1"
               placeholder='Number of players required...'
