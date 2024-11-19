@@ -1,5 +1,5 @@
 import express from "express";
-const router = require("../router");
+const router = require("../../router");
 import supertest from "supertest";
 import * as mongoose from "mongoose";
 const databaseName = "gd-test";
@@ -23,7 +23,7 @@ describe("User Component", () => {
   });
 
   it("comes with predefined venues and serves them from /venues", async () => {
-    const { default: Venue } = await import("../models/venue") // import module dynamically in order to await prefilling
+    const { default: Venue } = await import("../../models/venue") // import module dynamically in order to await prefilling
     const dbVenues = await Venue.find({});
     const { body: apiVenues } = await request.get("/venues");
     expect(dbVenues.length > 0).toBeTruthy();
