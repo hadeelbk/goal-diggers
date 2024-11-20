@@ -1,7 +1,7 @@
-import { vi, describe, expect, it} from "vitest"
+import { describe, expect, it} from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import { Game } from "../../@types/game";
 import { Venue } from "../../@types/venue";
 import { GamesContext, VenuesContext } from "../../App";
@@ -69,13 +69,11 @@ describe("AvailableGames", () => {
 
   it("has the same number of .availableGame as games provided", async () => {
     const { container } = render(
-      <BrowserRouter>
+      <MemoryRouter>
         <GamesContext.Provider value={{games: [...mockGames.slice(1)], setGames: ()=>{}}}>
-          <Routes>
-            <Route path="/" element={<AvailableGames />} />
-          </Routes>
+          <AvailableGames />
         </GamesContext.Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     )
 
     const numOfGames = container.querySelectorAll(".availableGame").length
@@ -84,13 +82,11 @@ describe("AvailableGames", () => {
 
   it("it doesn't render .availableGame for games in the past", async () => {
     const { container } = render(
-      <BrowserRouter>
+      <MemoryRouter>
         <GamesContext.Provider value={{games: [...mockGames.slice(0,1)], setGames: ()=>{}}}>
-          <Routes>
-            <Route path="/" element={<AvailableGames />} />
-          </Routes>
+          <AvailableGames />
         </GamesContext.Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     )
 
     const numOfGames = container.querySelectorAll(".availableGame").length
@@ -99,13 +95,11 @@ describe("AvailableGames", () => {
 
   it("it shows game with the earliest date as the first .availableGame", async () => {
     const { container } = render(
-      <BrowserRouter>
+      <MemoryRouter>
         <GamesContext.Provider value={{games: mockGames, setGames: ()=>{}}}>
-          <Routes>
-            <Route path="/" element={<AvailableGames />} />
-          </Routes>
+          <AvailableGames />
         </GamesContext.Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     )
 
     const firstGame = container.querySelector(".availableGame")
@@ -114,13 +108,11 @@ describe("AvailableGames", () => {
 
   it("it shows .notAvailableGames placeholder if no future games exist", async () => {
     const { container } = render(
-      <BrowserRouter>
+      <MemoryRouter>
         <GamesContext.Provider value={{games: [...mockGames.slice(0,1)], setGames: ()=>{}}}>
-          <Routes>
-            <Route path="/" element={<AvailableGames />} />
-          </Routes>
+          <AvailableGames />
         </GamesContext.Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     )
 
     const placeholder = container.querySelector(".notAvailableGames")
@@ -131,15 +123,13 @@ describe("AvailableGames", () => {
     const user = userEvent.setup();
 
     const { container } = render(
-      <BrowserRouter>
+      <MemoryRouter>
       <VenuesContext.Provider value={{venues: mockVenues}}>
         <GamesContext.Provider value={{games: mockGames, setGames: ()=>{}}}>
-          <Routes>
-            <Route path="/" element={<AvailableGames />} />
-          </Routes>
+          <AvailableGames />
         </GamesContext.Provider>
       </VenuesContext.Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     )
 
     const venueSelect = screen.getByDisplayValue("Select a venue");

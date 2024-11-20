@@ -2,18 +2,18 @@ import { vi, describe, expect, it} from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import LoginPage from "./LoginPage"
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import { UserContext } from "../App";
 
 interface MockUser {
-  userId: string;
-  username: string;
+  _id: string;
+  userName: string;
   email: string;
 }
 
 const mockUser:MockUser = {
-  userId: "12345",
-  username: "Testuser",
+  _id: "12345",
+  userName: "Testuser",
   email: "test@test.test"
 };
 
@@ -31,13 +31,11 @@ describe("LoginPage", () => {
     const user = userEvent.setup();
 
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <UserContext.Provider value={{user: null, setUser: setUserMock}}>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-          </Routes>
+          <LoginPage />
         </UserContext.Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     );
 
     const emailInput = screen.getByLabelText("Username or Email");
