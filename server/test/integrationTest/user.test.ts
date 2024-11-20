@@ -1,8 +1,8 @@
 import express from "express";
-const router = require("../router");
+import router from "../../router";
 import supertest from "supertest";
 import * as mongoose from "mongoose";
-import User from "../models/user";
+import User from "../../models/user";
 const databaseName = "gd-test";
 
 describe("User Component", () => {

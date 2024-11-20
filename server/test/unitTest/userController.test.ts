@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 jest.mock('../../models/user');
 jest.mock('bcrypt');
 
-// Suppress console logs during tests for clean output 
+// Suppress console logs during tests for clean output
 beforeAll(() => {
     jest.spyOn(console, 'log').mockImplementation(() => {});
     jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -19,7 +19,7 @@ afterAll(async () => {
     jest.restoreAllMocks();// Restore original console methods
   });
 
-  
+
 describe('User Controller', () => {
   afterEach(() => {
     jest.clearAllMocks(); // Clear mocks after each test
@@ -210,7 +210,7 @@ describe('User Controller', () => {
 
   describe('getUser', () => {
     it('should fetch a user by ID successfully', async () => {
-      const req = { params: { id: 'userId' } } as any;
+      const req = { params: { userId: 'userId' } } as any;
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),

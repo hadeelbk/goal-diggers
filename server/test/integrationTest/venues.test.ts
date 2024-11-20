@@ -1,5 +1,5 @@
 import express from "express";
-const router = require("../../router");
+import router from "../../router";
 import supertest from "supertest";
 import * as mongoose from "mongoose";
 const databaseName = "gd-test";
