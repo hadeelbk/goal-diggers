@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 import { GamesContext } from "../../App"
 import { getGame, joinGame } from "../../services/apiService"
 import { dateDisplay, timeDisplay } from "../../utilities/date-time-display"
-import NavBar from "../common/NavBar"
 import { Game } from '../../@types/game'
+import NavBar from '../common/NavBar'
 
 function GameDetails() {
   const { games, setGames } = useContext(GamesContext)

@@ -4,7 +4,7 @@ import { Game } from '../../@types/game';
 import { Venue } from '../../@types/venue';
 import { GamesContext, VenuesContext } from "../../App";
 import { dateDisplay, durationDisplay, timeDisplay } from '../../utilities/date-time-display';
-import NavBar from "../common/NavBar";
+import NavBar from '../common/NavBar';
 
 function GamesPerVenue() {
   const { games } = useContext(GamesContext)

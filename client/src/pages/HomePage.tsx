@@ -1,4 +1,4 @@
-import NavBar from '../components/common/NavBar';
+import NavBar from '../components/common/NavBar.test';
 import RegisteredVenueList from '../components/venues/RegisteredVenueList';
 import ActionContainer from '../components/common/ActionContainer';
 

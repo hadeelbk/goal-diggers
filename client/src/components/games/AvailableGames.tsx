@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { GamesContext, VenuesContext } from "../../App";
-import NavBar from "../common/NavBar";
 import { NavLink } from "react-router-dom";
 import { durationDisplay, dateDisplay, timeDisplay } from '../../utilities/date-time-display';
 import { Game } from '../../@types/game';
+import NavBar from '../common/NavBar';
 
 function AvailableGames() {
   const { games } = useContext(GamesContext)
