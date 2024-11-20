@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'
+export const BASE_URL = 'http://localhost:3000'
 
 export const getVenues = () => {
   return fetchData('/venues')
@@ -61,11 +61,11 @@ export const registerUser = (body: UserRegistration) => {
   return fetchData('/users', 'POST', body)
 }
 
-async function fetchData(endpoint: string, method: string = 'GET', body?: {}) {
+export async function fetchData(endpoint: string, method: string = 'GET', body?: {}) {
   const headers = new Headers()
   headers.append('Content-type', 'application/json')
   try {
-    const result = await fetch(BASE_URL + endpoint, {
+    const result = await fetch(`${BASE_URL}${endpoint}`, {
       method: method ? method : 'GET',
       body: body ? JSON.stringify(body) : null,
       headers: headers

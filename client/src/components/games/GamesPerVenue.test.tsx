@@ -1,16 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { GamesContext, VenuesContext } from '../../App';
 import GamesPerVenue from './GamesPerVenue';
 import { describe, it, expect, vi } from 'vitest';
-
-vi.mock('react-router-dom', async () => {
-  const original = await vi.importActual('react-router-dom'); // Import original module
-  return {
-    ...original, // Spread all original exports
-    BrowserRouter: original.BrowserRouter // Ensure BrowserRouter is included
-  };
-});
 
 describe('GamesPerVenue', () => {
   const mockVenues = [
@@ -31,34 +23,37 @@ describe('GamesPerVenue', () => {
     },
   ];
 
-
   it('renders correctly with games and venues', () => {
     render(
-      <MemoryRouter>
-        <GamesContext.Provider value={{ games: mockGames, setGames: vi.fn() }}>
-          <VenuesContext.Provider value={{ venues: mockVenues }}>
-            <GamesPerVenue />
-          </VenuesContext.Provider>
-        </GamesContext.Provider>
-      </MemoryRouter>
+      <GamesContext.Provider value={{ games: mockGames, setGames: vi.fn() }}>
+        <VenuesContext.Provider value={{ venues: mockVenues }}>
+          <MemoryRouter initialEntries={[`/venues/${mockVenues[0]._id}`]}>
+            <Routes>
+              <Route path="venues/:venueId" element={<GamesPerVenue />} />
+            </Routes>
+          </MemoryRouter>
+        </VenuesContext.Provider>
+      </GamesContext.Provider>
     );
 
-    expect(screen.getByText(/Stadium/i)).toBeInTheDocument();
+    expect(screen.getByText('Stadium')).toBeInTheDocument();
     expect(screen.getByText('5-a-side')).toBeInTheDocument();
-    expect(screen.getByText('20')).toBeInTheDocument();
+    expect(screen.getByText('20€')).toBeInTheDocument();
   });
 
   it('displays the no games message when no games are available', () => {
     render(
-      <MemoryRouter>
-        <GamesContext.Provider value={{ games: [], setGames: vi.fn() }}>
-          <VenuesContext.Provider value={{ venues: mockVenues }}>
-            <GamesPerVenue />
-          </VenuesContext.Provider>
-        </GamesContext.Provider>
-      </MemoryRouter>
+      <GamesContext.Provider value={{ games: [], setGames: vi.fn() }}>
+        <VenuesContext.Provider value={{ venues: mockVenues }}>
+          <MemoryRouter initialEntries={[`/venues/${mockVenues[0]._id}`]}>
+            <Routes>
+              <Route path="venues/:venueId" element={<GamesPerVenue />} />
+            </Routes>
+          </MemoryRouter>
+        </VenuesContext.Provider>
+      </GamesContext.Provider>
     );
 
-    expect(screen.getByText(/Don't see any games\? Take the lead and host one of your own!/i)).toBeInTheDocument();
+    expect(screen.getByText("Don't see any games? Take the lead and host one of your own!")).toBeInTheDocument();
   });
 });

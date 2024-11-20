@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GamesContext, VenuesContext } from '../../App';
 import { CreateGame, createGame } from '../../services/apiService';
-import NavBar from '../common/NavBar.test';
+import NavBar from '../common/NavBar';
 import { Venue } from '../../@types/venue';
 import { Game } from '../../@types/game';
 

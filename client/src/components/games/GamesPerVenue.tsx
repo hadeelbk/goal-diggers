@@ -5,12 +5,13 @@ import { Venue } from '../../@types/venue';
 import { GamesContext, VenuesContext } from "../../App";
 import { dateDisplay, durationDisplay, timeDisplay } from '../../utilities/date-time-display';
 import NavBar from '../common/NavBar';
+import { imageMap } from '../venues/image-map';
 
 function GamesPerVenue() {
   const { games } = useContext(GamesContext)
   const { venues } = useContext(VenuesContext)
   const { venueId } = useParams()
-  const [filteredGames, setFilteredGames] = useState<Game[] | null>([])
+  const [filteredGames, setFilteredGames] = useState<Game[]>([])
   const [venue, setVenue] = useState<Venue | null>(null)
 
   useEffect(() => {
@@ -25,6 +26,14 @@ function GamesPerVenue() {
     setVenue(foundVenue || null);
   }, [venues])
 
+  if (!venue) return (
+    <div>
+      <NavBar />
+      <p>Sorry, we couldn't find the venue you were looking for.</p>
+      <NavLink to="/available-games">Back to available games</NavLink>
+    </div>
+  )
+
   return (
     <>
       <NavBar />
@@ -32,10 +41,10 @@ function GamesPerVenue() {
         <div className='venueTitle'>
           <p><strong>Venue</strong>: {venue?.name}
             <br /> <strong>Address</strong>: <i>{venue?.address}</i></p>
-          <img src={venue?.image} height='400' width='650' />
+          <img src={imageMap[venue.image]} height='400' width='650' />
         </div>
         <div className='upcomingGames'>
-          {filteredGames ? (
+          {filteredGames.length ? (
             filteredGames.map(game => (
               <div className='availableGame' key={game._id}>
                 <NavLink to={`/game-details/${game._id}`}>
@@ -106,7 +115,7 @@ function GamesPerVenue() {
             ))
           ) : (
             <div className='notAvailableGames'>
-              <p>Don't see any games?Take the lead and host one of your own!</p>
+              <p>{'Don\'t see any games? Take the lead and host one of your own!'}</p>
               <NavLink to="/host-game">
                 <img
                   className="logo"

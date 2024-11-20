@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Game } from './@types/game';
+import { User } from './@types/user';
+import { Venue } from './@types/venue';
 import './App.css';
 import ScrollToTop from './components/common/ScrollToTop';
 import HostGameForm from './components/forms/HostGameForm';
@@ -9,10 +12,7 @@ import GameDetails from './components/games/GameDetails';
 import GamesPerVenue from './components/games/GamesPerVenue';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import { getVenues, getGames } from './services/apiService';
-import { Game } from './@types/game';
-import { User } from './@types/user';
-import { Venue } from './@types/venue';
+import { getGames, getVenues } from './services/apiService';
 
 export const VenuesContext = React.createContext<{venues: Venue[]}>({ venues: [] })
 
