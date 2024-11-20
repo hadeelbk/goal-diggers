@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-if (process.env.NODE_ENV !== 'TEST') {
+if (process.env.NODE_ENV !== 'test') {
 
   (async function main() {
     try {
