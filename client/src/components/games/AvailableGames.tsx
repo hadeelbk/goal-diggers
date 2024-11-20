@@ -178,7 +178,7 @@ function AvailableGames() {
             </NavLink>
           </div>
         ))}
-        {venueFilter === '' || (Array.isArray(filteredGames) && filteredGames.length === 0) &&
+        {(Array.isArray(filteredGames) && filteredGames.length === 0) &&
           <div className='notAvailableGames'>
             <p>Don’t see any games? Take the lead and host one of your own!</p>
             <NavLink to="/host-game">
