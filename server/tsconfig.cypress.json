@@ -1,0 +1,13 @@
+/* This is for TypeScript compilation and helps 
+the TypeScript compiler understand the types used in Cypress tests 
+as well as not inteferring with Jest tests */
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+      "types": ["cypress"],
+      "isolatedModules": false // Ensure compatibility with Cypress
+    },
+    "include": [
+      "test/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}"
+    ]
+  }

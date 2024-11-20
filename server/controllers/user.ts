@@ -23,23 +23,27 @@ async function createNewUser(req: Request, res: Response): Promise<void> {
   }
 }
 
-async function login(req: Request, res: Response): Promise<void | Response> {
+
+async function login(req: Request, res: Response): Promise<void> {
   const { usernameOrEmail, password } = req.body;
 
   try {
-    let user = await User.findOne({
-      $or: [{ userName: usernameOrEmail }, { email: usernameOrEmail }]
+    const user = await User.findOne({
+      $or: [{ userName: usernameOrEmail }, { email: usernameOrEmail }],
     });
 
     if (!user) {
-      return res.status(400).json({ error: "Invalid username or email" });
+      res.status(400).json({ error: "Invalid username or email" });
+      return;
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ error: "Invalid password" });
+      res.status(400).json({ error: "Invalid password" });
+      return;
     }
+
     res.json({ userId: user._id, username: user.userName, email: user.email });
   } catch (error) {
     console.error('Error logging in:', error);
@@ -67,4 +71,4 @@ async function getUser(req: Request, res: Response): Promise<void> {
   }
 }
 
-export { createNewUser, login, getUsers, getUser }
+export { createNewUser, login,getUsers, getUser }

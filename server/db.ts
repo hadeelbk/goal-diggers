@@ -16,4 +16,4 @@ if (process.env.NODE_ENV !== 'TEST') {
 
 }
 
-export = mongoose;
+export default mongoose;
