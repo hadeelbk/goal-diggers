@@ -1,43 +1,49 @@
 import { describe, it, expect, vi } from 'vitest';
-import { dateDisplay, timeDisplay, durationDisplay } from './date-time-display';
+import { dateDisplay, timeDisplay, durationDisplay } from './date-time-display'; // adjust the import path as needed
 
-const mockToday = new Date(2024, 11, 20);
-Date.now = vi.fn(() => mockToday.getTime());
+// Mock the current date
+const mockCurrentDate = new Date('2024-10-01T12:00:00Z'); // Use UTC time to avoid timezone issues
+vi.useFakeTimers();
+vi.setSystemTime(mockCurrentDate);
 
 describe('dateDisplay', () => {
   it('returns "Today" for the current date', () => {
-    expect(dateDisplay('2024-11-20')).toBe('Today');
+    const result = dateDisplay('2024-10-01');
+    expect(result).toBe('Today');
   });
 
   it('returns "Tomorrow" for the next day', () => {
-    expect(dateDisplay('2024-11-21')).toBe('Tomorrow');
+    const result = dateDisplay('2024-10-02');
+    expect(result).toBe('Tomorrow');
   });
 
-  it('returns formatted date for other days', () => {
-    expect(dateDisplay('2024-11-22')).toBe('Friday, Nov 22');
+  it('returns a formatted date for other days', () => {
+    const result = dateDisplay('2024-10-03');
+    expect(result).toBe('Thursday, Oct 3');
   });
 });
 
 describe('timeDisplay', () => {
-  it('returns formatted time', () => {
-    expect(timeDisplay('2024-11-20T14:30:00')).toBe('02:30 PM');
+  it('formats time correctly', () => {
+    expect(timeDisplay('2024-10-01T15:45:00')).toBe('03:45 PM');
+    expect(timeDisplay('2024-10-01T00:00:00')).toBe('12:00 AM');
   });
 });
 
 describe('durationDisplay', () => {
-  it('returns "00:30" for 0.5 hours', () => {
+  it('formats duration for half an hour', () => {
     expect(durationDisplay(0.5)).toBe('00:30');
   });
 
-  it('returns "1:00" for 1 hour', () => {
+  it('formats duration for one hour', () => {
     expect(durationDisplay(1)).toBe('1:00');
   });
 
-  it('returns "1:30" for 1.5 hours', () => {
+  it('formats duration for one and a half hours', () => {
     expect(durationDisplay(1.5)).toBe('1:30');
   });
 
-  it('returns "2:00" for 2 hours', () => {
+  it('formats duration for two hours', () => {
     expect(durationDisplay(2)).toBe('2:00');
   });
 });

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { GamesContext, VenuesContext } from '../../App';
 import GamesPerVenue from './GamesPerVenue';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 describe('GamesPerVenue', () => {
   const mockVenues = [
@@ -25,7 +25,7 @@ describe('GamesPerVenue', () => {
 
   it('renders correctly with games and venues', () => {
     render(
-      <GamesContext.Provider value={{ games: mockGames, setGames: vi.fn() }}>
+      <GamesContext.Provider value={{ games: mockGames, setGames: () => {} }}>
         <VenuesContext.Provider value={{ venues: mockVenues }}>
           <MemoryRouter initialEntries={[`/venues/${mockVenues[0]._id}`]}>
             <Routes>
@@ -43,7 +43,7 @@ describe('GamesPerVenue', () => {
 
   it('displays the no games message when no games are available', () => {
     render(
-      <GamesContext.Provider value={{ games: [], setGames: vi.fn() }}>
+      <GamesContext.Provider value={{ games: [], setGames: () => {} }}>
         <VenuesContext.Provider value={{ venues: mockVenues }}>
           <MemoryRouter initialEntries={[`/venues/${mockVenues[0]._id}`]}>
             <Routes>

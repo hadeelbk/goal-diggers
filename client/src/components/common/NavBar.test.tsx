@@ -9,7 +9,7 @@ describe('NavBar', () => {
   it('should display the correct links when user is not logged in', () => {
     render(
       <MemoryRouter>
-        <UserContext.Provider value={{ user: null, setUser: vi.fn() }}>
+        <UserContext.Provider value={{ user: null, setUser: () => {} }}>
           <NavBar />
         </UserContext.Provider>
       </MemoryRouter>
@@ -34,9 +34,6 @@ describe('NavBar', () => {
 
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Logout')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByText('Logout'));
-    expect(setUserMock).toHaveBeenCalledWith(null);
   });
 
   it('should logout user when logout button is clicked', () => {

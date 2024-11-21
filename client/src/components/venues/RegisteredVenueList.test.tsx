@@ -1,16 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { GamesContext, VenuesContext } from '../../App';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { VenuesContext } from '../../App';
 import RegisteredVenueList from './RegisteredVenueList';
-
-vi.mock('react-router-dom', async () => {
-  const original = await vi.importActual('react-router-dom');
-  return {
-    ...original,
-    BrowserRouter: original.BrowserRouter
-  };
-});
 
 describe('RegisteredVenueList', () => {
   const mockVenues = [
