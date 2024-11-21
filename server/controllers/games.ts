@@ -41,7 +41,7 @@ async function createGame(req:CreateGameRequest, res:Response):Promise<void> {
 
     res.status(201).json(game)
   } catch (error) {
-    console.error('Error creating game:', error);
+    console.log('Error creating game:', error);
     res.status(500).json({ message: `Internal server issue: ${error}` })
   }
 }
@@ -51,7 +51,7 @@ async function getGames(req: Request, res: Response): Promise<void> {
     const games = await Game.find().populate('venue').populate('players');
     res.status(200).json(games);
   } catch (error) {
-    console.error('Error fetching games:', error);
+    console.log('Error fetching games:', error);
     res.status(500).json({ message: `Internal server issue: ${error}` });
   }
 }
@@ -68,7 +68,7 @@ async function getGame(req: Request, res: Response): Promise<void> {
     }
     res.status(200).json(game);
   } catch (error) {
-    console.error('Error fetching game:', error);
+    console.log('Error fetching game:', error);
     res.status(500).json({ message: `Internal server issue: ${error}` });
   }
 }
@@ -97,8 +97,8 @@ async function joinGame(req: JoinGameRequest, res: Response): Promise<void> {
 
     res.status(200).json(updatedGame);
   } catch (error) {
-    console.error("Error joining game:", error);
-    res.status(500).json({ message: `Internal server issue: ${error}` });
+    console.log("Error joining game:", error);
+    res.status(500).json({"error":"Game not found" });
   }
 }
 

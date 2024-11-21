@@ -78,11 +78,14 @@ const populateVenues = async (): Promise<void> => {
       console.log('Venues already exist. No data inserted.');
     }
   } catch (error) {
-    console.error(`Failed to populate venues collection: ${error}`);
+    console.error('Error populating venues:', error);
   }
 };
 
-// Call the seeding function
-populateVenues().catch((error) => console.error('Error populating venues:', error));
+// Prevent seeding during tests by checking the environment
+if (process.env.NODE_ENV !== 'test') {
+  populateVenues();
+}
+
 
 export default Venue;
