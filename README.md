@@ -16,7 +16,7 @@ This is a football game organizer app that allows users to find or host football
 
 
 ## Contributers:
-Hadil Ben Koura [LinkedIn](www.linkedin.com/in/hadil-benkoura)  -[GitHub] (https://github.com/hadeelbk)
+Hadil Ben Koura [LinkedIn](www.linkedin.com/in/hadil-benkoura)  -[GitHub](https://github.com/hadeelbk)
 Anastasia Mleko [LinkedIn](https://www.linkedin.com/in/anastasia-mleko) - [GitHub] ()
 Jonas Rinderlin [LinkedIn] [GitHub] ()
 
